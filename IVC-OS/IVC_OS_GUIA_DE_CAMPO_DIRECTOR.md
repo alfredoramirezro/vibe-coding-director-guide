@@ -109,6 +109,43 @@ Esta fase establece las reglas del juego, los límites del sistema y la arquitec
   1. **Guía de Flujo en 3 Pasos (`/como-funciona`):** Esquema visual interactivo: 1. Define tu objetivo → 2. El motor genera y valida → 3. Descarga o despliega.
   2. **Página de Glosario Integrado (`/glosario`):** Diccionario en lenguaje cotidiano que explica cada término técnico para usuarios novatos y compradores corporativos.
 
+### Directiva 0.10: Gobernanza del MVP, Doble Horizonte y Matriz de Triaje de Características `[P0]`
+* **El Problema Crítico:** El Director sufre de **Amnesia de Visión** (olvida la catedral completa por hiperfocarse en los detalles mínimos del MVP) y cae en la trampa de **Sugerencias de la IA** (los agentes halagan sugiriendo features accesorias y queman tokens en código prematuro e incompleto).
+* **1. El Framework de Doble Horizonte en el Repositorio:**
+  * `NORTH_STAR.md` (**La Catedral Inmutable** a 12-24 meses): Plano maestro del SaaS completo. Vive en el repositorio para que el Director nunca pierda el rumbo, pero **NUNCA se inyecta completo al agente que programa el MVP**.
+  * `MVP_BOUNDARY.md` (**El Primer Ladrillo Quirúrgico**): Define exclusivamente la *Hipótesis Central de Valor*: la versión mínima que resuelve el dolor principal tan bien que el usuario pagaría por ella. Todo lo demás está prohibido.
+  * `FEATURE_PARKING_LOT.md` (**La Bóveda de Ideas**): Archivo de texto plano donde se congelan en 2 líneas las ideas brillantes para el futuro, consumiendo 30 tokens en lugar de 15,000 tokens en código improvisado.
+* **2. Directiva de Contención en el Prompt del Agente (El Bozal a la IA):**
+  > *"DIRECTIVA DE CONTENCIÓN ESTRICTA: Tu rol se limita EXCLUSIVAMENTE a implementar lo solicitado en la especificación activa. Queda ESTRICTAMENTE PROHIBIDO sugerir nuevas funcionalidades, librerías extras o extensiones de producto. Si detectas una oportunidad fuera del alcance, regístrala únicamente como un punto en `FEATURE_PARKING_LOT.md` sin generar código ni insistir."*
+* **3. La Matriz de Triaje de Características del Director (Regla de 4 Niveles):**
+
+```
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                      MATRIZ DE TRIAJE DE CARACTERÍSTICAS                               │
+├─────────────────────┬───────────────────┬──────────────────────────────────────────────┤
+│ NIVEL               │ DESTINO EN HOJA   │ PREGUNTA ÁCIDA DE CLASIFICACIÓN DEL DIRECTOR │
+├─────────────────────┼───────────────────┼──────────────────────────────────────────────┤
+│ 1. ESSENTIAL-TO-HAVE│ 100% EXCLUSIVO    │ "¿Si quito esto, el producto deja de resolver│
+│    (Must-Have)      │ DEL MVP (M1)      │  el dolor nuclear o se vuelve inservible?"   │
+│                     │                   │  -> Si la respuesta es SÍ: ENTRA AL MVP.     │
+├─────────────────────┼───────────────────┼──────────────────────────────────────────────┤
+│ 2. GOOD-TO-HAVE     │ FASE 2: CRECIMIENTO│ "¿El usuario puede resolver su dolor con un  │
+│    (Should-Have)    │ (SaaS Hardening)  │  workaround manual el Día 1?"                │
+│                     │                   │  -> Si la respuesta es SÍ: SE POSTERGA.      │
+│                     │                   │  (Ej. exportar a Excel, invitar miembros).   │
+├─────────────────────┼───────────────────┼──────────────────────────────────────────────┤
+│ 3. NICE-TO-HAVE     │ FASE 3: DELEITE   │ "¿Es un detalle estético o de pulido que el  │
+│    (Could-Have)     │ & RETENCIÓN (M3)  │  usuario ni siquiera notará en semana 1?"    │
+│                     │                   │  -> Si la respuesta es SÍ: A LA FASE 3.      │
+│                     │                   │  (Ej. modo oscuro auto, confeti, atajos).    │
+├─────────────────────┼───────────────────┼──────────────────────────────────────────────┤
+│ 4. WISH-TO-HAVE     │ BÓVEDA PERMANENTE │ "¿Requiere infraestructura o APIs caras cuya │
+│    (Won't-Have-Now) │ (PARKING LOT)     │  demanda real aún no está comprobada?"       │
+│                     │                   │  -> A `FEATURE_PARKING_LOT.md` con 0 código. │
+│                     │                   │  (Ej. app móvil nativa, IA personalizada).   │
+└─────────────────────┴───────────────────┴──────────────────────────────────────────────┘
+```
+
 ---
 
 ## FASE 1: Construcción Confinada y Desarrollo Agéntico en Arnés (Día 1)

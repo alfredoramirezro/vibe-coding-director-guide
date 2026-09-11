@@ -35,6 +35,7 @@ The resulting deliverable is the **IVC-OS Director's Field Guide v2.0** (`IVC_OS
 - D-0.7: Plain Language for Target Market (Clean Spanish, minimal acronyms) `[P2]`
 - D-0.8: Sensory Design: Bespoke Inline SVG Illustrations & Zero Stock Imagery `[P2]`
 - D-0.9: Zero Sales Friction UX: 3-step `/como-funciona` & `/glosario` `[P2]`
+- D-0.10: MVP Governance, Dual-Horizon (North Star vs MVP Boundary), Parking Lot Vault & Feature Triage Matrix (Essential / Good / Nice / Wish) `[P0]`
 
 ### Phase 1: Sandboxed Construction & Agentic Development (Day 1)
 - D-1.1: Ephemeral Docker Sandbox with Outbound Network Egress Guardrails `[P0]`
