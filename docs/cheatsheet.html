@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVC-OS — Cheat Sheet de Prompts para Directores de Vibe Coding</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --code-bg: #0b1120;
+      --success: #22c55e;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      margin-bottom: 0.75rem;
+    }
+
+    h1 { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem; }
+    p.subtitle { color: var(--text-muted); font-size: 1.05rem; }
+
+    .grid-modes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .mode-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .mode-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .mode-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .mode-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 2.5rem 0 1rem 0;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+
+    .prompt-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .prompt-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .copy-btn {
+      background: var(--accent);
+      color: #0b1120;
+      border: none;
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: background 0.15s ease;
+    }
+
+    .copy-btn:hover { background: var(--accent-hover); }
+    .copy-btn.copied { background: var(--success); color: #fff; }
+
+    pre {
+      padding: 1.25rem;
+      background: var(--code-bg);
+      color: #e2e8f0;
+      font-family: var(--mono);
+      font-size: 0.875rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    td strong { color: var(--accent); }
+
+    .print-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #fff;
+      color: #0b1120;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      z-index: 100;
+    }
+
+    .print-btn:hover { background: #e2e8f0; }
+
+    @media print {
+      body { background: #fff; color: #000; padding: 0; }
+      .print-btn, .copy-btn { display: none; }
+      .mode-card, .prompt-box, table { border-color: #ccc; background: #fff; }
+      pre { background: #f8fafc; color: #000; border: 1px solid #ddd; }
+      h1, h2, h3, .prompt-title { color: #000; }
+      .badge { border-color: #000; color: #000; background: none; }
+      a { color: #000; text-decoration: underline; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <span class="badge">Estándar IVC-OS v2.0</span>
+      <h1>Guía de Campo Rápida: Prompts para Vibe Coding</h1>
+      <p class="subtitle">Manual de bolsillo y catálogo de prompts directos para dirigir desarrollo asistido por IA (Cursor, Antigravity, Copilot, Claude Code).</p>
+    </header>
+
+    <section>
+      <h2>⚡ Modos de Operación</h2>
+      <div class="grid-modes">
+        <div class="mode-card">
+          <h3>1. Inherente</h3>
+          <p>Opera de fondo en tu IDE mediante directivas en <code>GEMINI.md</code> o <code>.cursorrules</code>.</p>
+        </div>
+        <div class="mode-card">
+          <h3>2. Plantillas</h3>
+          <p>Pides al agente que copie y adapte <code>NORTH_STAR</code>, <code>MVP_BOUNDARY</code> y <code>FEATURE_PARKING_LOT</code>.</p>
+        </div>
+        <div class="mode-card">
+          <h3>3. Skill / Comandos</h3>
+          <p>Invocas los runbooks de IVC-OS para correr auditorías, bug-sweeps o triajes de features.</p>
+        </div>
+        <div class="mode-card">
+          <h3>4. Subagentes</h3>
+          <p>Delegas revisiones adversariales a agentes auditores bajo la regla de <strong>No Self-Approval</strong>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>📋 Catálogo de Prompts Copiables para tus Apps</h2>
+
+      <!-- Prompt 1 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">🚀 1. Arrancar un Proyecto Nuevo o Módulo</span>
+          <button class="copy-btn" onclick="copyText('p1', this)">Copiar Prompt</button>
+        </div>
+        <pre id="p1">Inicializa la estructura IVC-OS en este proyecto.
+Copia y adapta las plantillas de `templates/` aquí (NORTH_STAR, MVP_BOUNDARY y FEATURE_PARKING_LOT).
+Pregúntame únicamente por la Hipótesis Central de Valor y la Frontera Negativa (lo que NO haremos en esta versión).</pre>
+      </div>
+
+      <!-- Prompt 2 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">🎯 2. Paquete de Inicio Limpio (Session Primer)</span>
+          <button class="copy-btn" onclick="copyText('p2', this)">Copiar Prompt</button>
+        </div>
+        <pre id="p2">Arranca con un SESSION_PRIMER bajo el estándar IVC-OS para esta tarea.
+Recuerda las restricciones mandatorias:
+- Archivos modulares estrictamente &lt; 250 líneas.
+- Spec-Driven First: muéstrame los schemas antes de codificar.
+- Bozal a la IA: no sugieras librerías ni features extras; envíalas a FEATURE_PARKING_LOT.md.</pre>
+      </div>
+
+      <!-- Prompt 3 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">⚖️ 3. Triaje de Funcionalidades (Evitar Token Drain)</span>
+          <button class="copy-btn" onclick="copyText('p3', this)">Copiar Prompt</button>
+        </div>
+        <pre id="p3">Aplica la Matriz de Triaje de Características de IVC-OS a estas ideas:
+[Pega aquí tu lista de ideas]
+
+Clasifícalas con la pregunta ácida en:
+1. Essential-to-Have (Entra al MVP actual).
+2. Good-to-Have (Fase 2 Crecimiento / Workaround manual).
+3. Nice-to-Have (Fase 3 Deleite).
+4. Wish-to-Have (A FEATURE_PARKING_LOT.md con 0 código generado).</pre>
+      </div>
+
+      <!-- Prompt 4 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">🔍 4. Auditoría de Calidad (Bug-Sweep en 5 Capas)</span>
+          <button class="copy-btn" onclick="copyText('p4', this)">Copiar Prompt</button>
+        </div>
+        <pre id="p4">Ejecuta el Bug-Sweep en 5 capas de IVC-OS sobre este archivo/módulo:
+- Capa 1: Invariantes y tipos (cero 'any', manejo exhaustivo de null/undefined).
+- Capa 2: Concurrencia y debounce en envíos.
+- Capa 3: Fuzzing y valores límite (vacíos, caracteres raros, números negativos).
+- Capa 4: Regresión y pruebas en verde.
+- Capa 5: Seguridad (cero secretos, sanitización contra XSS e inyecciones).</pre>
+      </div>
+
+      <!-- Prompt 5 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">🎨 5. Auditoría de UI, Accesibilidad y Mandato Zero-Popup</span>
+          <button class="copy-btn" onclick="copyText('p5', this)">Copiar Prompt</button>
+        </div>
+        <pre id="p5">Audita esta pantalla bajo las directivas sensoriales y de interfaz de IVC-OS:
+1. Mandato Zero-Popup: verifica que no existan modales flotantes (&lt;Dialog&gt;) y que todo flujo denso sea una subpágina dedicada con URL limpia y scroll vertical.
+2. Accesibilidad WCAG 2.1 AA/AAA: contraste &gt; 7:1, outline de foco visible, áreas táctiles de al menos 44x44px y navegación 100% por teclado.
+3. Anti-Slop: empty-states first, cero testimonios inventados y cero contadores simulados.
+4. Gráficos: ilustraciones vectoriales inline SVG nativas (cero imágenes de stock externas).</pre>
+      </div>
+
+      <!-- Prompt 6 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">🛡️ 6. Revisión Adversarial (No Self-Approval)</span>
+          <button class="copy-btn" onclick="copyText('p6', this)">Copiar Prompt</button>
+        </div>
+        <pre id="p6">Aplica la regla de No Self-Approval de IVC-OS.
+Delega una revisión adversarial al subagente `code-reviewer` en contexto limpio para verificar arquitectura, seguridad, modularidad (&lt;250 líneas) y evidencia de pruebas antes del commit.</pre>
+      </div>
+
+      <!-- Prompt 7 -->
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">🏁 7. Checklist Pre-Lanzamiento de 10 Dimensiones</span>
+          <button class="copy-btn" onclick="copyText('p7', this)">Copiar Prompt</button>
+        </div>
+        <pre id="p7">Aplica el Checklist Pre-Lanzamiento de 10 Dimensiones de la Fase 4 de IVC-OS.
+Evalúa 1 a 1:
+1. Build (cero errores TS/Linter).
+2. Tests (suite en verde con evidencia literal).
+3. Security (auditoría de paquetes).
+4. Secrets (cero API keys en código).
+5. Performance (Core Web Vitals LCP &lt; 2.0s).
+6. Accessibility (auditoría axe/Lighthouse sin violaciones AA).
+7. Legal (Aviso de Privacidad y Términos enlazados en footer).
+8. Error Monitoring (capturador de excepciones configurado).
+9. Database Backup (estrategia de respaldo verificada).
+10. SEO/GEO (robots.txt, sitemap.xml, llms.txt y metadatos OpenGraph).
+
+¿Tenemos el 10/10 PASS para autorizar el GO?</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>🤖 Comportamientos Automáticos del Agente</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Directiva</th>
+            <th>Acción Automática del Agente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Anti-God-Files</strong></td>
+            <td>Si un componente supera las <strong>250-300 líneas</strong>, lo descompone en subcomponentes o custom hooks automáticamente.</td>
+          </tr>
+          <tr>
+            <td><strong>Bozal a la IA</strong></td>
+            <td>No inventa librerías ni features accesorias; cualquier sugerencia la desvía a <code>FEATURE_PARKING_LOT.md</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>Verification Before Completion</strong></td>
+            <td>No afirma que el código funciona sin adjuntar la salida literal de terminal.</td>
+          </tr>
+          <tr>
+            <td><strong>Zero-Popup</strong></td>
+            <td>Construye subpáginas dedicadas en lugar de modales emergentes flotantes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <button class="print-btn" onclick="window.print()">
+    🖨️ Imprimir o Guardar como PDF
+  </button>
+
+  <script>
+    function copyText(id, btn) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = '✓ ¡Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerText = originalText;
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

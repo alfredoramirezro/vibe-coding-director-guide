@@ -81,9 +81,11 @@ La guía está articulada cronológicamente cubriendo todo el ciclo de vida del 
 Puedes leer o descargar la guía en los siguientes formatos:
 
 1. **Lectura Directa en GitHub:** Abre el archivo [`IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md`](IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md).
-2. **Descarga en 1 Clic (Markdown Crudo):**  
+2. **Cheat Sheet Rápido de Prompts (Markdown):** Abre [`docs/GUIA_OPERATIVA_CHAT_ANTIGRAVITY.md`](docs/GUIA_OPERATIVA_CHAT_ANTIGRAVITY.md) para copiar y pegar comandos directos en el chat.
+3. **Cheat Sheet Interactivo e Imprimible (HTML / PDF):** Abre [`docs/cheatsheet.html`](docs/cheatsheet.html) con botones de 1 clic para copiar y soporte de exportación a PDF.
+4. **Descarga en 1 Clic (Markdown Crudo):**  
    Haz clic derecho y selecciona *Guardar como...* en [Descargar Guía Completa (.md)](https://raw.githubusercontent.com/alfredoramirezro/vibe-coding-director-guide/main/IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md).
-3. **Clonar el Repositorio:**
+5. **Clonar el Repositorio:**
    ```bash
    git clone https://github.com/alfredoramirezro/vibe-coding-director-guide.git
    cd vibe-coding-director-guide
@@ -92,6 +94,16 @@ Puedes leer o descargar la guía en los siguientes formatos:
 ---
 
 ## 🚀 Cómo Usar esta Guía con tus Herramientas de IA
+
+### En Antigravity (`GEMINI.md`)
+Coloca el archivo maestro [`GEMINI.md`](GEMINI.md) en la raíz de tu workspace (ej. `c:/.Proyectos/GEMINI.md`). Antigravity cargará jerárquicamente las reglas en todas las sesiones y subproyectos:
+* **Anti-God-Files:** Veto automático a archivos mayores a 250 líneas.
+* **Bozal a la IA:** Las sugerencias de features accesorias se desvían a `FEATURE_PARKING_LOT.md`.
+* **Zero-Popup:** Obliga a crear subpáginas dedicadas con scroll en lugar de modales flotantes.
+* **No Self-Approval:** Exige revisión adversarial con subagentes antes del commit.
+* **Evidencia en Terminal:** No acepta respuestas que no incluyan la ejecución de pruebas.
+
+Consulta el catálogo de comandos en [`docs/GUIA_OPERATIVA_CHAT_ANTIGRAVITY.md`](docs/GUIA_OPERATIVA_CHAT_ANTIGRAVITY.md).
 
 ### En Cursor (`.cursorrules`)
 Copia el archivo `IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md` en la raíz de tu proyecto o referencia las directivas clave en tu archivo `.cursorrules`:
@@ -104,7 +116,7 @@ Sigue estrictamente el estándar IVC-OS (IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md):
 - Entrega siempre la salida literal de terminal con pruebas en verde antes de dar por terminada la tarea.
 ```
 
-### En Claude Code / Antigravity / Devin
+### En Claude Code / Copilot / Devin
 Coloca la guía en tu carpeta de skills o referénciala directamente en tu sesión:
 ```bash
 @IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md
