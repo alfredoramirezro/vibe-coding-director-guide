@@ -335,11 +335,183 @@ Gate 6: Seguridad & Egress   Secretos en texto plano, licencias    Escaneo Semgr
 
 ---
 
-## 7. Conclusión y Transición hacia la Web App de IVC-OS
+## 7. Procedimientos Operativos Especializados del Director de Vibe Coding (Runbooks de Tracción, Auditoría y Lanzamiento)
 
-Con la formalización de esta **Guía de Campo de Dirección**, la plataforma IVC-OS deja de ser una colección teórica de 200 agentes dispersos y se transforma en un **Sistema Operativo de Ingeniería Disciplinada y Rigurosa**.
+Esta sección codifica los procedimientos tácticos reales que el Director ejecuta en las etapas maduras de desarrollo, validación con público y presentación comercial:
 
-Los directores, arquitectos y operadores que adopten este estándar poseen ahora un manual de vuelo completo para gobernar la IA sin caer en las trampas del *prompt-and-pray*, la alucinación de métricas y la deuda técnica descontrolada.
+---
+
+### Protocolo 7.1: El "Bug-Sweep" para Proyectos Avanzados (Caza Sistemática de Errores)
+* **Trigger / Cuándo activar:** El código base tiene sus módulos principales implementados y se requiere una auditoría exhaustiva de estabilidad antes de continuar agregando funcionalidades.
+* **Anti-patrón Común:** Decirle al agente simplemente: *"busca bugs y arréglalos"*. El agente empezará a hacer cambios cosméticos arbitrarios o romperá contratos previos.
+* **Procedimiento Estructurado del Director:**
+  1. **Invocación del Agente Auditor en Modo Solo-Lectura:** Se le prohíbe modificar código en esta fase. Se le exige ejecutar un barrido en 5 capas:
+     * **Capa 1: Invariantes y Tipado Estricto:** Ejecutar chequeo de tipos (`tsc --noEmit` o `mypy`). Identificar usos de `any`, aserciones de tipo forzadas (`as unknown as T`) o valores opcionales no validados.
+     * **Capa 2: Asincronía y Concurrencia:** Buscar llamadas a promesas o `async/await` sin bloques `try/catch`, estados de carga inconsistentes, o fugas de memoria en `useEffect`, timers y subscripciones WebSocket.
+     * **Capa 3: Resiliencia de Rutas y Navegación:** Identificar rutas dinámicas no controladas, redirects cíclicos o enlaces con slugs rotos.
+     * **Capa 4: Fuzzing de Entradas y Casos Límite:** Analizar qué ocurre si los formularios reciben strings vacíos, payloads gigantes de 10,000 caracteres, emojis o números negativos.
+     * **Capa 5: Fuga de Secretos y Hardcoded Keys:** Escaneo de cadenas de texto en el frontend buscando tokens de API o variables de entorno expuestas sin prefijo público.
+  2. **Emisión del `BUG_REGISTRY.md`:** El agente debe listar todos los hallazgos categorizados por severidad:
+     * **P0 (Crítico / Bloqueante):** Caída de la app, fallo de autenticación o pérdida de datos.
+     * **P1 (Alto):** Funcionalidad rota pero con workaround disponible.
+     * **P2 (Medio / Cosmético):** Desalineación visual, advertencias en consola sin impacto fatal.
+  3. **Plan de Corrección Atómica:** El Director aprueba únicamente los P0 y P1, ordenando resolver **un solo bug por commit**, con su prueba automatizada de regresión asociada.
+
+---
+
+### Protocolo 7.2: La Compuerta Pre-Lanzamiento ("Are We Ready to Launch?" - Protocolo Go-Live)
+* **Trigger / Cuándo activar:** El equipo o el founder plantea salir a producción o abrir el sistema a usuarios reales.
+* **Procedimiento del Director:** Ejecutar una auditoría de **10 Dimensiones Críticas de Despegue** (basada en el estándar de `vibecoder-skills/pre-launch-checklist`). Cada dimensión recibe un veredicto binario:
+
+```
+========================================================================================
+CHECKLIST PRE-LANZAMIENTO: 10 DIMENSIONES CRÍTICAS DE DESPEGUE (GO-LIVE)
+========================================================================================
+[ ] 1. SEGURIDAD & SECRETOS:
+    - Variables de entorno sensibles (DATABASE_URL, API_KEYS) aisladas en el servidor.
+    - Headers de seguridad configurados: CSP, HSTS, X-Frame-Options, X-Content-Type-Options.
+    - Reglas de CORS restringidas exclusivamente a los dominios autorizados de producción.
+
+[ ] 2. RESILIENCIA & PÁGINAS DE ERROR:
+    - Página 404 personalizada con diseño de marca y botón de retorno al home.
+    - Página 500 / Error Boundary global que captura caídas de React sin pantalla en blanco.
+    - Timeouts explícitos configurados en todas las llamadas fetch/Axios a servicios externos.
+
+[ ] 3. METADATOS, SEO & OPENGRAPH (SOCIAL SHARING):
+    - Tags de OpenGraph (`og:title`, `og:description`, `og:image` de 1200x630px probada).
+    - Twitter Card configurada (`summary_large_image`).
+    - Archivos `robots.txt` y `sitemap.xml` válidos y en la raíz.
+    - Favicons completos: 16x16, 32x32 y `apple-touch-icon.png` (180x180).
+
+[ ] 4. ACCESIBILIDAD (A11Y) & ERGONOMÍA:
+    - Navegación por teclado completa (foco visible con `:focus-visible` en todos los botones).
+    - Contraste de texto conforme a WCAG AA (mínimo 4.5:1 en texto normal, 3:1 en encabezados).
+    - Skip Link (`Saltar al contenido principal`) operativo en el inicio del DOM.
+
+[ ] 5. RENDIMIENTO & CORE WEB VITALS:
+    - Imágenes en formato moderno (WebP o AVIF) con atributos `width` y `height` explícitos.
+    - Cero bloqueos de render en fuentes (usando `font-display: swap`).
+    - Largest Contentful Paint (LCP) proyectado < 2.5 segundos.
+
+[ ] 6. CUMPLIMIENTO LEGAL & PRIVACIDAD:
+    - Enlace visible y funcional a "Aviso de Privacidad" adaptado a la legislación aplicable.
+    - Enlace a "Términos y Condiciones de Uso" con cláusulas de propiedad y exención de daños.
+    - Si usa cookies no esenciales, banner de consentimiento conforme a normativa.
+
+[ ] 7. TELEMETRÍA, LOGS & MONITORING:
+    - Herramienta de tracking de errores (Sentry / LogRocket) inicializada y probada.
+    - Filtro estricto para no enviar PII (contraseñas, tarjetas, emails) a los servidores de logs.
+
+[ ] 8. BASE DE DATOS & MIGRACIONES:
+    - Todas las migraciones ejecutadas exitosamente en la base de datos de producción.
+    - Índices creados en columnas de búsqueda frecuente y claves foráneas (`tenant_id`, `email`).
+    - Backups automáticos programados y con retención mínima de 7 días.
+
+[ ] 9. RESPONSIVIDAD MULTI-DISPOSITIVO:
+    - Vista verificada en viewport móvil de 375px (iPhone SE / Android compacto).
+    - Vista verificada en tablet (768px) y pantallas de escritorio estándar (1440px).
+    - Cero desbordamiento horizontal (horizontal scrollbar involuntaria).
+
+[ ] 10. COMPROBACIÓN DEL FLUJO CENTRAL (CRITICAL USER JOURNEY):
+    - El usuario puede registrarse, verificar su cuenta, usar la función principal y cerrar sesión.
+========================================================================================
+VEREDICTO FINAL: [ ] GO (10/10 aprobados)   /   [ ] NO-GO (Cualquier punto pendiente bloquea)
+========================================================================================
+```
+
+---
+
+### Protocolo 7.3: Manejo de Pasarelas de Pago en Modo Staging / Beta Pública (*Graceful Payment Stubbing*)
+* **El Problema Real:** El Director desea validar el producto con público real o clientes beta, pero las credenciales de producción de Stripe, MercadoPago o Conekta aún están en trámite o se desea diferir la fricción del cobro bancario inmediato.
+* **El Error Amateur:** Dejar la app rota arrojando un error `500 Missing API Key` o esconder los precios haciendo que el producto parezca gratuito y luego cobrar por sorpresa.
+* **El Procedimiento del Director: Patrón "Intent-Capture / Frictionless Beta Checkout":**
+  1. **Transparencia en Precios y Tiers:** Los planes de suscripción (ej. *Starter: $29 USD/mes*, *Pro: $79 USD/mes*) se muestran exactamente como serán en producción, con su desglose de características.
+  2. **Botón de Acción Adaptativo:** El CTA del botón en checkout dice: *"Activar Acceso Beta Fundador"* o *"Reservar con Precio Especial de Lanzamiento"*.
+  3. **Flujo de Checkout Simulado pero Transaccional:**
+     * Al hacer clic, el modal solicita los datos del usuario (Nombre, Empresa, Email).
+     * En lugar de pedir tarjeta de crédito bancaria, el sistema registra la transacción en base de datos:
+       ```json
+       {
+         "subscription_tier": "pro",
+         "payment_status": "beta_trial_active",
+         "trial_ends_at": "2026-10-11T00:00:00Z",
+         "founder_discount_locked": 0.50
+       }
+       ```
+     * La pantalla de confirmación informa con total elegancia y honestidad:
+       > *"¡Bienvenido a la Cohorte Fundadora! Tu cuenta Pro ha sido activada con 30 días de cortesía. Durante esta fase beta no requerimos tarjeta bancaria. Al finalizar tu periodo de prueba, conservarás tu tarifa especial de fundador del 50% vitalicio."*
+  4. **Beneficio para el Director:** Permite validar la **intención de pago real**, el CTR de conversión por plan y el embudo de onboarding sin bloquear el proyecto por trámites bancarios.
+
+---
+
+### Protocolo 7.4: Generación de Decks en HTML 16:9 Estilo Slide Deck (Inversionistas y Clientes Fundadores)
+* **Contexto:** El Director necesita comunicar la visión con impacto profesional a dos públicos muy distintos: inversionistas de capital y primeros clientes beta / fundadores.
+* **El Formato:** Una presentación en **un solo archivo HTML autocontenido (`deck-investor.html` / `deck-founders.html`)**, con proporción panorámica 16:9, soporte para navegación por teclado (flechas izquierda/derecha o barra espaciadora), tipografía de alta gama (*Syne* para títulos, *JetBrains Mono* para métricas y código) y diseño dark-tech sobrio.
+
+#### Estructura Canónica del Deck 1: Inversionistas (Investor Pitch Deck — 10 Slides)
+1. **Slide 1: Portada & Tesis de Inversión:** Nombre del proyecto, logo, *one-liner* contundente y fecha.
+2. **Slide 2: El Dolor del Mercado (*The Burning Problem*):** La fragmentación de herramientas y el caos de deuda técnica que sufren los equipos al usar IA sin control.
+3. **Slide 3: La Solución (*The Unique Mechanism*):** Cómo IVC-OS orquesta agentes, arneses y contratos inmutables para entregar software confiable.
+4. **Slide 4: Demostración Visual del Producto:** Wireframes y diagramas de flujo de alto impacto que demuestran la tecnología funcionando.
+5. **Slide 5: Tamaño de Mercado (TAM / SAM / SOM):** El mercado global de herramientas de desarrollo asistido por IA y SaaS vertical.
+6. **Slide 6: Modelo de Negocio & Unit Economics:** Suscripción mensual (SaaS tiers), márgenes brutos y política de eficiencia de inferencia de tokens.
+7. **Slide 7: Foso Defensivo (*The Moat*):** Por qué otros no pueden copiarlo fácilmente (memoria persistente, catálogo de gobernanza, arneses de ejecución y RAG propietario).
+8. **Slide 8: Tracción & Validación Temprana:** Métricas reales de cohortes beta, usuarios en lista de espera o pruebas de concepto empresariales.
+9. **Slide 9: Equipo Fundador & Capacidad de Ejecución:** Trayectoria técnica y visión del equipo de liderazgo.
+10. **Slide 10: La Oferta (*The Ask*):** Capital buscado, asignación de fondos (I+D, infraestructura, GTM) e hitos alcanzables a 12-18 meses.
+
+#### Estructura Canónica del Deck 2: Clientes Fundadores (Founding Customer Cohort — 6 Slides)
+1. **Slide 1: Diagnóstico de tu Problema Operativo:** *"¿Cuánto tiempo y dinero pierde tu equipo hoy lidiando con software roto y bugs de IA?"*
+2. **Slide 2: El Antes vs. El Después:** Comparativa visual del proceso artesanal lento frente al flujo automatizado de IVC-OS.
+3. **Slide 3: Demostración en 3 Pasos:** Intención → Especificación en Arnés → Software Desplegado.
+4. **Slide 4: La Oferta de Socio Fundador (*Founding Cohort Program*):** Descuento vitalicio garantizado, canal directo con el equipo de ingeniería y soporte de migración gratuito.
+5. **Slide 5: Blindaje y Cero Riesgo:** Garantía de exportación total de datos, cero dependencias cautivas y soporte prioritario.
+6. **Slide 6: Llamado a la Acción (CTA de Reserva):** *"Asegura uno de los 20 lugares exclusivos de la cohorte fundadora"*.
+
+---
+
+### Protocolo 7.5: Arquitectura y Gobierno de Roles SaaS (RBAC: Superadmin / Tenant Admin / User)
+* **Contexto:** Todo SaaS profesional requiere desde el día uno una separación estricta de permisos para evitar que los usuarios accedan a funciones administrativas o que los clientes se vean entre sí.
+* **Procedimiento del Director: Matriz de Control de Acceso Basada en Roles (RBAC):**
+
+```
+┌────────────────────────────────────────────────────────────────────────┐
+│                        MATRIZ DE ROLES SAAS                            │
+├───────────────────┬───────────────────┬────────────────────────────────┤
+│ ROL               │ ALCANCE           │ PRIVILEGIOS CANÓNICOS          │
+├───────────────────┼───────────────────┼────────────────────────────────┤
+│ 1. END USER       │ Nivel Proyecto    │ - Ver y editar sus proyectos.  │
+│    (Miembro)      │ (Dentro de su     │ - Ejecutar tareas y workflows. │
+│                   │ organización)     │ - Consultar documentación.     │
+├───────────────────┼───────────────────┼────────────────────────────────┤
+│ 2. TENANT ADMIN   │ Nivel Organización│ - Todo lo de End User.         │
+│    (Dueño Cuenta) │ (Su empresa)      │ - Invitar/revocar miembros.    │
+│                   │                   │ - Gestionar plan/facturación.  │
+│                   │                   │ - Configurar llaves y webhooks.│
+├───────────────────┼───────────────────┼────────────────────────────────┤
+│ 3. SUPERADMIN     │ Nivel Plataforma  │ - Panel interno `/superadmin`. │
+│    (Operador IVC) │ (Todos los tenants│ - Métricas globales de sistema.│
+│                   │ y el sistema)     │ - Suplantación de soporte      │
+│                   │                   │   (*Impersonation* con log).   │
+│                   │                   │ - Override de cuotas/créditos. │
+│                   │                   │ - Suspensión de tenants.       │
+└───────────────────┴───────────────────┴────────────────────────────────┘
+```
+
+* **Directivas de Blindaje de Roles para el Director:**
+  1. **Ruta Aislada del Superadmin:** El panel de administración global debe vivir en un subdominio o ruta protegida (ej. `/admin-platform`), restringida por validación de rol a nivel middleware y protegida por autenticación de doble factor (2FA).
+  2. **Suplantación de Identidad Segura (*Audited Impersonation*):** Cuando el soporte de la plataforma necesite entrar a la cuenta de un cliente para diagnosticar un problema:
+     - Debe existir una sesión temporal explícita que muestre un banner amarillo visible: *"Modo Soporte Activo: Visualizando como [Usuario]"*.
+     - Cada acción realizada bajo suplantación genera un registro inmutable en `audit_logs` que no puede ser borrado.
+  3. **Verificación de Fronteras a Nivel API (Defense in Depth):** Nunca confiar solo en que el frontend oculte botones. Cada endpoint en el backend debe validar el trinomio: `(authenticated_user, required_role, resource_tenant_id)`.
+
+---
+
+## 8. Conclusión y Transición hacia la Web App de IVC-OS
+
+Con la formalización de esta **Guía de Campo de Dirección**, la plataforma IVC-OS deja de ser una colección teórica de 200 agentes dispersos y se transforma en un **Sistema Operativo de Ingeniería Disciplinada, Validación Comercial y Rigor Fiduciario**.
+
+Los directores, arquitectos y operadores que adopten este estándar poseen ahora un manual de vuelo integral que cubre desde la formulación inicial de la intención hasta el barrido de bugs, la compuerta de lanzamiento, la tracción en modo beta y la presentación ejecutiva para inversionistas y clientes fundadores.
 
 **Siguiente Paso Estratégico:**  
-Habiendo establecido y blindado este método rector, el proyecto se encuentra en condiciones óptimas para proceder a la **Fase 2**: el diseño y especificación técnica de la **Web App de IVC-OS**, la cual incorporará de forma nativa estos protocolos, compuertas de decisión y flujos de supervisión humana en su interfaz de usuario.
+Habiendo establecido, enriquecido y blindado este método rector con tus procedimientos operativos de campo, el proyecto se encuentra en condiciones óptimas para proceder a la **Fase 2**: el diseño y especificación técnica de la **Web App de IVC-OS**, la cual incorporará de forma nativa estos módulos, paneles de administración RBAC, compuertas de pre-lanzamiento y flujos de supervisión humana en su interfaz de usuario.

@@ -41,12 +41,19 @@ The resulting deliverable is the **IVC-OS Director's Field Guide** (`IVC_OS_GUIA
    - Protocol 3.3: Risk-Tiered Tool Gateway (Tier 0 local read to Tier 3 production/destructive requiring mandatory 2FA human sign-off).
    - Protocol 3.4: Distributed Observability (OpenTelemetry `TraceId` linking intent -> spec -> agents -> tool calls -> commits).
 
-4. **Emergency Runbook & Lethal Anti-Patterns:**
+4. **Layer IV: Specialized Operational Runbooks (The Director's Battle-Tested Procedures):**
+   - Protocol 7.1: The 5-layer "Bug-Sweep" for mature projects (Invariants/Types, Concurrency/Async, Routes, Fuzzing, Secrets -> `BUG_REGISTRY.md`).
+   - Protocol 7.2: "Are We Ready to Launch?" 10-Dimension Go-Live Audit (Security, Resilience/404/500, SEO/OG, a11y, Performance/LCP, Legal, Telemetry, Migrations, Responsiveness, Critical User Journey).
+   - Protocol 7.3: Graceful Payment Staging & Frictionless Beta Checkout (testing traction and intent without live payment credentials).
+   - Protocol 7.4: 16:9 Slide Decks in standalone HTML (Syne + JetBrains Mono; Investor Pitch Deck 10 slides & Founding Customer Cohort 6 slides).
+   - Protocol 7.5: SaaS RBAC Multi-Role Governance (Superadmin `/superadmin` with audited impersonation, Tenant Admin, End User).
+
+5. **Emergency Runbook & Lethal Anti-Patterns:**
    - Cold shutdown, hard git rollback (`git reset --hard HEAD`), and memory purge for architectural drift.
    - Immediate container pause, secret rotation, and Semgrep static analysis for sandbox egress violations.
    - 3-strike circuit breaker and root-cause analyzer invocation for infinite debug loops.
 
-5. **Binary Decision Matrix (Hard Gates 1 to 6):**
+6. **Binary Decision Matrix (Hard Gates 1 to 6):**
    - Non-negotiable Go / No-Go evaluation criteria covering Spec, Veracity, Test Harness, Diff Size, Adversarial Review, and Hardening.
 
 ---
