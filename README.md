@@ -6,6 +6,10 @@
 [![Vibe Coding Standard](https://img.shields.io/badge/Standard-IVC--OS%20v2.0-blue.svg)](file:///IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md)
 [![Language: Spanish](https://img.shields.io/badge/Language-Spanish%20(Universal)-green.svg)](#)
 
+> [!NOTE]
+> **Aviso de Alcance y Desacoplamiento de Repositorios:**  
+> Este repositorio está dedicado **exclusivamente al marco metodológico, directivas normativas, plantillas y guía de campo de dirección (`IVC-OS Field Guide`)**. El código fuente de implementación de la aplicación web y la plataforma de software se respaldará y desarrollará en un repositorio y ruta independiente.
+
 ---
 
 ## 🌟 ¿Qué es este repositorio?
@@ -78,10 +82,10 @@ Puedes leer o descargar la guía en los siguientes formatos:
 
 1. **Lectura Directa en GitHub:** Abre el archivo [`IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md`](IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md).
 2. **Descarga en 1 Clic (Markdown Crudo):**  
-   Haz clic derecho y selecciona *Guardar como...* en [Descargar Guía Completa (.md)](https://raw.githubusercontent.com/TU_USUARIO/vibe-coding-director-guide/main/IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md).
+   Haz clic derecho y selecciona *Guardar como...* en [Descargar Guía Completa (.md)](https://raw.githubusercontent.com/alfredoramirezro/vibe-coding-director-guide/main/IVC-OS/IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md).
 3. **Clonar el Repositorio:**
    ```bash
-   git clone https://github.com/TU_USUARIO/vibe-coding-director-guide.git
+   git clone https://github.com/alfredoramirezro/vibe-coding-director-guide.git
    cd vibe-coding-director-guide
    ```
 
@@ -134,7 +138,7 @@ Si están programando con IA (Cursor, Claude Code, Copilot, Antigravity), seguro
 Armamos una Guía de Campo completa y de acceso abierto para quienes dirigen plataformas y proyectos de Vibe Coding:
 
 📘 IVC-OS: Guía de Campo para Directores de Vibe Coding
-👉 https://github.com/TU_USUARIO/vibe-coding-director-guide
+👉 https://github.com/alfredoramirezro/vibe-coding-director-guide
 
 Incluye:
 ✅ Spec-Driven Development (congelar contratos antes de codificar).
