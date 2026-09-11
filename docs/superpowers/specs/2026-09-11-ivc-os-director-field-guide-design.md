@@ -65,6 +65,7 @@ The resulting deliverable is the **IVC-OS Director's Field Guide** (`IVC_OS_GUIA
    - Protocol 9.7: Local-First Auto-Draft Resilience (`localStorage`/`IndexedDB` auto-restore on closed tabs/network flickers).
    - Protocol 9.8: Shadow Mode Model Evaluation (10% traffic blind testing before model migration).
    - Protocol 9.9: Living Documentation, Strict Anti-God-Files (<250-300 lines per file), and Immutable Bidirectional Spec Synchronization (Zero Spec Drift, 2-minute comprehension test).
+   - Protocol 9.10: Account Deletion with Statutory Tax Hold (PII dissociation & soft-delete + 5-year immutable fiscal ledger retention for tax audits).
 
 7. **Emergency Runbook & Lethal Anti-Patterns:**
    - Cold shutdown, hard git rollback (`git reset --hard HEAD`), and memory purge for architectural drift.

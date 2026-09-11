@@ -715,18 +715,57 @@ Esta sección aborda las mayores preocupaciones de los equipos de ingeniería y 
 
 ---
 
+### Protocolo 9.10: Ciclo de Vida de Eliminación de Cuenta con Retención Fiscal Obligatoria (*Soft-Delete Disociado & Statutory Tax Hold*)
+* **El Conflicto Legal y Técnico:**
+  - Por un lado, la normativa de protección de datos personales (Derechos ARCO / LFPDPPP en México, GDPR en Europa, CCPA en EE.UU.) otorga al usuario el derecho inalienable de **eliminar su cuenta y cancelar sus datos personales**.
+  - Por otro lado, la legislación fiscal y mercantil (Art. 30 del Código Fiscal de la Federación en México, IRS en EE.UU., CRA en Canadá) exige **la conservación obligatoria de la contabilidad, facturas (CFDIs), transacciones bancarias y comprobantes de pago por un periodo mínimo de 5 a 10 años**.
+* **El Error Común de la IA:** Ejecutar un `DELETE FROM users WHERE id = :id CASCADE`, borrando o dejando huérfanos los registros contables, o bien negarle al usuario el borrado alegando que no se puede, violando la ley de privacidad.
+* **Directiva del Director: Patrón de "Disociación Criptográfica y Retención Fiscal Bloqueada":**
+  1. **Fase 1: Purgado Inmediato del Perfil Operativo (Derecho al Olvido):**
+     * En el instante en que el usuario solicita borrar su cuenta:
+       - Se revoca su sesión, se eliminan sus contraseñas (hash), tokens de API y llaves SSH.
+       - Se anonimizan sus datos personales en la tabla de usuarios:
+         ```sql
+         UPDATE users SET
+           name = 'Usuario Eliminado',
+           email = 'anonymized_' || encode(sha256(email::bytea), 'hex') || '@deleted.local',
+           phone = NULL,
+           status = 'deleted',
+           deleted_at = NOW()
+         WHERE id = :target_user_id;
+         ```
+       - Sus proyectos y código fuente en el sandbox se eliminan de forma irrecuperable (o se expiden en su archivo .ZIP final previo al borrado).
+  2. **Fase 2: Bloqueo y Segregación del Libro Mayor Fiscal (*Statutory Tax Hold*):**
+     * La tabla de facturación y transacciones (`billing_transactions`, `invoices`, `cfdi_records`) **es inmutable y jamás se borra con un CASCADE**.
+     * Los registros de cobros, folios fiscales, montos pagados, RFC/Tax-ID y timbrados se trasladan o marcan con:
+       ```sql
+       UPDATE billing_transactions SET
+         statutory_tax_hold = TRUE,
+         retention_expires_at = NOW() + INTERVAL '5 years'
+       WHERE user_id = :target_user_id;
+       ```
+     * Estos datos quedan **bloqueados**: el usuario eliminado ya no puede entrar a la plataforma, pero los registros contables quedan blindados y resguardados para auditorías del SAT o autoridades fiscales.
+  3. **Acceso Exclusivo de Cumplimiento (Compliance-Only View):**
+     * Los datos bajo retención fiscal solo son visibles para el rol **Superadmin / Auditor Contable** en una subpágina aislada (`/admin-platform/compliance-tax`), con logs de auditoría criptográfica.
+  4. **Cláusula de Transparencia en el Aviso de Privacidad:**
+     * Se informa explícitamente al usuario en el flujo de borrado:
+       > *"Tus datos personales, proyectos y credenciales han sido eliminados de inmediato. Conforme al Artículo 30 del Código Fiscal de la Federación (y normativas fiscales aplicables), los comprobantes de cobro y registros contables se conservarán bajo bloqueo seguro durante el plazo legal obligatorio de 5 años únicamente para fines fiscales, tras lo cual se destruirán definitivamente."*
+
+---
+
 ## 10. Conclusión y Transición hacia la Web App de IVC-OS
 
-Con la integración de este catálogo exhaustivo de directivas de **Soberanía de Datos, Kill-Switch de Emergencia, Migraciones Zero-Downtime, Modularización Estricta (Anti-God-Files) y Documentación Viva**, la **Guía de Campo para Directores de IVC-OS** queda consagrada como el estándar más avanzado, completo y riguroso de la industria para dirigir plataformas de vibe coding.
+Con la integración de este catálogo exhaustivo de directivas de **Soberanía de Datos, Retención Fiscal Obligatoria, Kill-Switch de Emergencia, Migraciones Zero-Downtime, Modularización Estricta (Anti-God-Files) y Documentación Viva**, la **Guía de Campo para Directores de IVC-OS** queda consagrada como el estándar más avanzado, completo y riguroso de la industria para dirigir plataformas de vibe coding.
 
 El método no deja cabos sueltos:
-* Governa con rigor la estrategia de negocio, la economía de inferencia y la soberanía de datos (Ejes I y IV).
+* Governa con rigor la estrategia de negocio, la economía de inferencia, la soberanía de datos y el cumplimiento fiscal estatutario (Ejes I y IV).
 * Aplica la tríada técnica inquebrantable de SDD, Context Engineering y Harness Engineering con modularización estricta (Eje II).
 * Garantiza la operación multi-tenant, el aislamiento y la supervisión de flotas efímeras (Eje III).
 * Previene anti-patrones letales y provee runbooks mecánicos ante emergencias (Módulos 4 y 5).
 * Codifica los procedimientos de campo para caza de bugs, pre-lanzamiento, staging de pagos y decks en HTML (Módulo 7).
 * Asegura una experiencia estética propia en SVG, lenguaje claro hispano, accesibilidad universal (WCAG) y optimización GEO/SEO (Módulo 8).
 * Blinda al desarrollador humano contra el código enredado, exigiendo documentación viva, sincronización inmutable de specs y archivos menores a 250 líneas (Módulo 9).
+* Resuelve armónicamente el derecho de supresión de cuenta frente a la obligación legal de retención contable por 5 años (Módulo 9.10).
 
 ---
 
