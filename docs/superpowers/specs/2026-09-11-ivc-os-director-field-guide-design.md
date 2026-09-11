@@ -1,79 +1,83 @@
 # Design Doc: IVC-OS Director Field Guide & Leadership Operating Method
 > **Date:** 2026-09-11  
 > **Status:** Approved / Completed  
-> **Target:** Platform Directors, Lead Architects, and SaaS Operators for Intelligent Vibe Coding Platforms (`IVC-OS`)
+> **Target:** Platform Directors, Lead Architects, and SaaS Operators for Intelligent Vibe Coding Platforms (`IVC-OS`)  
+> **Architecture Version:** 2.0 (Chronological Lifecycle & Priority Matrix)
 
 ---
 
 ## 1. Context & Motivation
-The IVC-OS repository contains a 459-page architectural transcript (`chatgpt.com-Intelligent Vibe Coding Operating System.pdf`) defining a multi-agent system (13 phases, 30 agent dimensions, RAG cognitive infrastructure, execution sandbox, monorepo architecture, and a 36-atomic-prompt pack).
+The IVC-OS repository contains a 459-page architectural transcript (`chatgpt.com-Intelligent Vibe Coding Operating System.pdf`) defining an agentic operating system (13 phases, 30 agent dimensions, RAG cognitive infrastructure, Docker sandbox, monorepo architecture, and a 36-atomic-prompt pack).
 
-However, a critical gap was identified: the document specifies the *software* and *agent-to-agent contracts*, but lacks a formal **Operating Method for the Human Director/Leader** who operates and governs the vibe coding platform. Without a structured leadership method, AI-assisted development suffers from severe anti-patterns:
+However, a fundamental gap was identified: the original document specifies the *software* and *agent-to-agent contracts*, but lacks a formal **Operating Method for the Human Director/Leader** who operates and governs the vibe coding platform. Without a structured leadership method, AI-assisted development suffers from severe anti-patterns:
 - *Prompt-and-Pray:* issuing vague prompts and accepting code blindly without tests or contracts.
 - *Synthetic Proof Hallucination:* inventing fake social proof, fictional user metrics, and stock testimonials on day-0 landing pages.
 - *The Self-Approval Trap:* trusting the code-generating agent to review and approve its own code.
 - *Context Rot & Amnesia:* overwhelming the context window with unparsed logs.
 - *Runaway Tokenomics & Infinite Debugging Loops:* agents burning compute without progress.
+- *Code Spaghetti & Massive God-Files:* developers unable to understand unmodularized AI code.
 
 ---
 
-## 2. Architectural Design & Deliverable
-The resulting deliverable is the **IVC-OS Director's Field Guide** (`IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md`), designed following the proven, battle-tested operational format of `vibecoder-skills`:
+## 2. Canonical Chronological Architecture (Phases 0 to 5 & Priorities)
+The resulting deliverable is the **IVC-OS Director's Field Guide v2.0** (`IVC_OS_GUIA_DE_CAMPO_DIRECTOR.md`), structured as a continuous lifecycle from Day 0 to Live Production, with clear priority tagging:
+* `[P0 - CRÍTICO / BLOQUEANTE]`: Immediate halt if violated.
+* `[P1 - ALTA CALIDAD / ARQUITECTURA]`: Mandatory engineering, a11y, and maintainability standard.
+* `[P2 - EXCELENCIA / TRACCIÓN & GTM]`: Commercial, sensory design, and go-to-market excellence.
 
-### 2.1 Three-Layer Triad
-1. **Layer I: Strategic Direction & Intent Governance (CPO / Founder):**
-   - Protocol 1.1: Intent Framing & Negative Boundary Setting (defining what NOT to build).
-   - Protocol 1.2: Tokenomics Budgeting & 80% Burn Rate Early Warning.
-   - Protocol 1.3: Intellectual Property & Licensing Shield (whitelisting MIT/Apache 2.0; blocking GPL/AGPL).
-   - Protocol 1.4: Anti-Feature Creep & Ruthless YAGNI.
+### Phase 0: Inception, Contracts, Sovereignty & Design Pre-flight (Day 0)
+- D-0.1: Intent Framing & Negative Boundary Setting `[P0]`
+- D-0.2: Zero-Training Contractual Shield (`data_retention: 0`, `X-No-Train: true`) `[P0]`
+- D-0.3: Intellectual Property & Permissive Licensing (MIT/Apache 2.0; blocking GPL/AGPL) `[P0]`
+- D-0.4: Tokenomics Budget Guardrails & 80% Burn Rate Alert `[P1]`
+- D-0.5: Spec-Driven Development (SDD) & Contract Freezing (Zod/Pydantic/OpenAPI) `[P0]`
+- D-0.6: Strict Modularization (Anti-God-Files < 250 lines) & Structured Memory `[P1]`
+- D-0.7: Plain Language for Target Market (Clean Spanish, minimal acronyms) `[P2]`
+- D-0.8: Sensory Design: Bespoke Inline SVG Illustrations & Zero Stock Imagery `[P2]`
+- D-0.9: Zero Sales Friction UX: 3-step `/como-funciona` & `/glosario` `[P2]`
 
-2. **Layer II: Technical Engineering & Operational Hardening Triad (Lead Architect):**
-   - **Spec-Driven Development (SDD):** Freezing Zod/Pydantic schemas and OpenAPI contracts before any implementation code is authored.
-   - **Context Engineering:** Structured memory (`PROJECT_SPEC.md`, `CONTEXT.md`, `SESSION_PRIMER.md`) and active context pruning.
-   - **Harness Engineering:** Confinement in ephemeral Docker sandboxes with strict outbound network egress guardrails and deterministic mocks.
-   - **Veracity & Anti-Slop (The 7 Golden Rules):** Zero fabricated proof, Proof of Mechanism over fake social proof, empty-state first, zero placeholders (`// TODO`), zero dead-ends (`href="#"`), the Benefit Test, and pre-flight veracity audits.
-   - **Agentic TDD & Verification Before Completion:** Red-Green-Refactor with mandatory literal CLI terminal test output.
-   - **Doubt-Driven Development & Adversarial Review:** Strict No-Self-Approval rule, clean-context reviewer agents, and micro-diffs capped at 150-200 lines.
+### Phase 1: Sandboxed Construction & Agentic Development (Day 1)
+- D-1.1: Ephemeral Docker Sandbox with Outbound Network Egress Guardrails `[P0]`
+- D-1.2: Disposable Single-Use Agent Fleet Pattern `[P1]`
+- D-1.3: Risk-Tiered Tool Gateway (Tier 0 local read to Tier 3 2FA sign-off) `[P0]`
+- D-1.4: Context Engineering & Active Pruning (`PROJECT_SPEC.md`, `CONTEXT.md`, `PRIMER.md`) `[P1]`
+- D-1.5: Local-First Auto-Draft Persistence (`localStorage`/`IndexedDB`) `[P2]`
+- D-1.6: Agentic TDD & Literal CLI Terminal Verification (`Verification Before Completion`) `[P0]`
+- D-1.7: Adversarial Clean-Context Review (`No-Self-Approval`) & Micro-Diffs (< 200 lines) `[P0]`
+- D-1.8: Living Documentation with Rationale (TSDoc) & Zero Spec Drift `[P1]`
 
-3. **Layer III: SaaS Platform Operations & Disposable Fleet Governance (Platform Operator):**
-   - Protocol 3.1: Strict Multi-Tenant Boundary Isolation with PostgreSQL Row-Level Security (RLS) and tenant-scoped `pgvector` collections.
-   - Protocol 3.2: Disposable Agent Fleet Pattern (agents are single-use disposable workers; repos and contracts are permanent).
-   - Protocol 3.3: Risk-Tiered Tool Gateway (Tier 0 local read to Tier 3 production/destructive requiring mandatory 2FA human sign-off).
-   - Protocol 3.4: Distributed Observability (OpenTelemetry `TraceId` linking intent -> spec -> agents -> tool calls -> commits).
+### Phase 2: Advanced Quality Audit, Veracity & Accessibility (Day 2)
+- D-2.1: 5-Layer "Bug-Sweep" for Mature Codebases (`BUG_REGISTRY.md` with P0/P1/P2) `[P1]`
+- D-2.2: The 7 Golden Rules of Veracity & Anti-Slop (Zero fake social proof, empty-state first, no `// TODO`) `[P0]`
+- D-2.3: International Accessibility Standards (WCAG 2.1/2.2 AA/AAA, >4.5:1/7:1, 100% keyboard, ADHD/Dyslexia) `[P1]`
+- D-2.4: Zero-Popup Mandate (Dedicated subpages and native scroll over modals) `[P1]`
+- D-2.5: SaaS Multi-Role RBAC Governance (Superadmin `/superadmin` with audited impersonation, Tenant Admin, User) `[P0]`
 
-4. **Layer IV: Specialized Operational Runbooks (The Director's Battle-Tested Procedures):**
-   - Protocol 7.1: The 5-layer "Bug-Sweep" for mature projects (Invariants/Types, Concurrency/Async, Routes, Fuzzing, Secrets -> `BUG_REGISTRY.md`).
-   - Protocol 7.2: "Are We Ready to Launch?" 10-Dimension Go-Live Audit (Security, Resilience/404/500, SEO/OG, a11y, Performance/LCP, Legal, Telemetry, Migrations, Responsiveness, Critical User Journey).
-   - Protocol 7.3: Graceful Payment Staging & Frictionless Beta Checkout (testing traction and intent without live payment credentials).
-   - Protocol 7.4: 16:9 Slide Decks in standalone HTML (Syne + JetBrains Mono; Investor Pitch Deck 10 slides & Founding Customer Cohort 6 slides).
-   - Protocol 7.5: SaaS RBAC Multi-Role Governance (Superadmin `/superadmin` with audited impersonation, Tenant Admin, End User).
+### Phase 3: Traction Validation, Market & Commercial Presentation (Day 3)
+- D-3.1: Graceful Payment Staging / Frictionless Beta Checkout (intent capture without live payment credentials) `[P1]`
+- D-3.2: 16:9 Widescreen Standalone HTML Investor Pitch Deck (10 slides) `[P2]`
+- D-3.3: 16:9 Widescreen Standalone HTML Founding Customer Cohort Deck (6 slides) `[P2]`
+- D-3.4: Shadow Mode Evaluation for Candidate AI Models (10% traffic blind testing) `[P2]`
 
-5. **Layer V: Sensorial Design, Human Language, Global Accessibility & GEO/SEO Optimization:**
-   - Protocol 8.1: Bespoke Inline SVG Illustrations & Zero Stock Imagery (no external hotlinks).
-   - Protocol 8.2: Plain Language for Target Market (clean Mexican/Hispanic Spanish, minimal acronyms, preserving only essential industry terms).
-   - Protocol 8.3: Zero Sales Friction UX (self-explanatory interface, guided 3-step `/como-funciona`, `/glosario` subpage).
-   - Protocol 8.4: International Accessibility & Inclusivity (WCAG 2.1/2.2 AA/AAA, >4.5:1 / 7:1 contrast, 100% keyboard navigation, ADHD/Dyslexia motion-reduction, Zero-Popup mandate).
-   - Protocol 8.5: Post-Launch Discovery & Indexing (SEO technical hierarchy, SEM conversion landing parity, GEO optimization via `llms.txt`, `llms-full.txt`, `ai.txt` and Schema.org JSON-LD).
+### Phase 4: Pre-Launch, Release Hardening & Go-Live Deployment (Day 4)
+- D-4.1: "Are We Ready to Launch?" 10-Dimension Critical Go-Live Checklist (10/10 PASS = GO) `[P0]`
+- D-4.2: Zero-Downtime Database Migrations (Expand, Migrate in background, Contract) `[P0]`
+- D-4.3: Dark Launching & Staged Feature Flags (Superadmin -> Beta Cohort -> 100% Public) `[P1]`
+- D-4.4: Technical SEO, SEM Conversion Parity, and Generative Engine Optimization (`llms.txt`, `llms-full.txt`, `ai.txt`, Schema.org) `[P1]`
 
-6. **Layer VI: Data Sovereignty, Live Operations & Developer Maintainability:**
-   - Protocol 9.1: Zero-Training Contractual Shield (`data_retention: 0`, `X-No-Train: true`).
-   - Protocol 9.2: Global Agent Kill-Switch (sub-500ms emergency pause, token revocation, read-only maintenance mode).
-   - Protocol 9.3: Zero-Downtime Database Migrations (Expand, Migrate in background, Contract).
-   - Protocol 9.4: Feature Flags & Dark Launching (Superadmin -> Founding Cohort -> General Availability).
-   - Protocol 9.5: Zero Vendor Lock-in 1-Click .ZIP Data Export (code, schemas, specs, SVG assets).
-   - Protocol 9.6: Silent Watchdog Bot to Telegram/Discord (alerts on 500 errors, new checkouts, 80% token burn, agent circuit breaker).
-   - Protocol 9.7: Local-First Auto-Draft Resilience (`localStorage`/`IndexedDB` auto-restore on closed tabs/network flickers).
-   - Protocol 9.8: Shadow Mode Model Evaluation (10% traffic blind testing before model migration).
-   - Protocol 9.9: Living Documentation, Strict Anti-God-Files (<250-300 lines per file), and Immutable Bidirectional Spec Synchronization (Zero Spec Drift, 2-minute comprehension test).
-   - Protocol 9.10: Account Deletion with Statutory Tax Hold (PII dissociation & soft-delete + 5-year immutable fiscal ledger retention for tax audits).
+### Phase 5: Live Operations, Resilience & Statutory Fiscal Compliance (Day 5+)
+- D-5.1: Global Agent Emergency Kill-Switch (sub-500ms Docker freeze, token revocation, read-only mode) `[P0]`
+- D-5.2: Strict Multi-Tenant Isolation with PostgreSQL Row-Level Security (RLS) & Vector Partitioning `[P0]`
+- D-5.3: Silent Watchdog Bot to Telegram/Discord for 4 Critical Alert Types `[P1]`
+- D-5.4: Zero Vendor Lock-in 1-Click .ZIP Full Data Export (code, DDL, specs, SVG assets) `[P1]`
+- D-5.5: Account Deletion Lifecycle with 5-Year Statutory Tax Hold (PII dissociation + immutable billing ledger per Art. 30 CFF / IRS) `[P0]`
+- D-5.6: Distributed Observability via OpenTelemetry `TraceId` `[P1]`
 
-7. **Emergency Runbook & Lethal Anti-Patterns:**
-   - Cold shutdown, hard git rollback (`git reset --hard HEAD`), and memory purge for architectural drift.
-   - Immediate container pause, secret rotation, and Semgrep static analysis for sandbox egress violations.
-   - 3-strike circuit breaker and root-cause analyzer invocation for infinite debug loops.
-
-8. **Binary Decision Matrix (Hard Gates 1 to 6):**
-   - Non-negotiable Go / No-Go evaluation criteria covering Spec, Veracity, Test Harness, Diff Size, Adversarial Review, and Hardening.
+### Normative Appendices
+- Appendix A: Catalog of Lethal Vibe Coding Anti-Patterns.
+- Appendix B: Emergency Runbook & Drift Response Playbook (Architectural drift, egress violation, infinite debuggers).
+- Appendix C: Binary Hard Gates Matrix (Gates 1 to 8: Spec, Modularity, Veracity, TDD, Micro-Diff, Adversarial, Go-Live, Fiscal/Hardening).
+- Appendix D: Transition to IVC-OS Web App Implementation.
 
 ---
 
@@ -86,4 +90,4 @@ The resulting deliverable is the **IVC-OS Director's Field Guide** (`IVC_OS_GUIA
 ---
 
 ## 4. Next Milestone
-With the Director's Field Guide established, the project is cleared for **Phase 2: IVC-OS Web App Architecture & Implementation Planning**, which will translate these human-in-the-loop workflows, hard gates, and fleet controls into an interactive, accessible, zero-popup web application.
+The Director's Field Guide is completely organized chronologically and priority-tagged. The project is fully cleared to enter **Phase 2: IVC-OS Web App Architecture & Implementation Planning**.
