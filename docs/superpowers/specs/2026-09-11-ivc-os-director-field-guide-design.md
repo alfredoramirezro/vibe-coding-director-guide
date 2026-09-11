@@ -48,12 +48,19 @@ The resulting deliverable is the **IVC-OS Director's Field Guide** (`IVC_OS_GUIA
    - Protocol 7.4: 16:9 Slide Decks in standalone HTML (Syne + JetBrains Mono; Investor Pitch Deck 10 slides & Founding Customer Cohort 6 slides).
    - Protocol 7.5: SaaS RBAC Multi-Role Governance (Superadmin `/superadmin` with audited impersonation, Tenant Admin, End User).
 
-5. **Emergency Runbook & Lethal Anti-Patterns:**
+5. **Layer V: Sensorial Design, Human Language, Global Accessibility & GEO/SEO Optimization:**
+   - Protocol 8.1: Bespoke Inline SVG Illustrations & Zero Stock Imagery (no external hotlinks).
+   - Protocol 8.2: Plain Language for Target Market (clean Mexican/Hispanic Spanish, minimal acronyms, preserving only essential industry terms).
+   - Protocol 8.3: Zero Sales Friction UX (self-explanatory interface, guided 3-step `/como-funciona`, `/glosario` subpage).
+   - Protocol 8.4: International Accessibility & Inclusivity (WCAG 2.1/2.2 AA/AAA, >4.5:1 / 7:1 contrast, 100% keyboard navigation, ADHD/Dyslexia motion-reduction, Zero-Popup mandate).
+   - Protocol 8.5: Post-Launch Discovery & Indexing (SEO technical hierarchy, SEM conversion landing parity, GEO optimization via `llms.txt`, `llms-full.txt`, `ai.txt` and Schema.org JSON-LD).
+
+6. **Emergency Runbook & Lethal Anti-Patterns:**
    - Cold shutdown, hard git rollback (`git reset --hard HEAD`), and memory purge for architectural drift.
    - Immediate container pause, secret rotation, and Semgrep static analysis for sandbox egress violations.
    - 3-strike circuit breaker and root-cause analyzer invocation for infinite debug loops.
 
-6. **Binary Decision Matrix (Hard Gates 1 to 6):**
+7. **Binary Decision Matrix (Hard Gates 1 to 6):**
    - Non-negotiable Go / No-Go evaluation criteria covering Spec, Veracity, Test Harness, Diff Size, Adversarial Review, and Hardening.
 
 ---

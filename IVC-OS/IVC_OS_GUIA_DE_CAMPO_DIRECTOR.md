@@ -507,11 +507,102 @@ VEREDICTO FINAL: [ ] GO (10/10 aprobados)   /   [ ] NO-GO (Cualquier punto pendi
 
 ---
 
-## 8. Conclusión y Transición hacia la Web App de IVC-OS
+## 8. Directivas de Diseño Sensorial, Lenguaje Humano, Accesibilidad Global y Optimización GEO/SEO
 
-Con la formalización de esta **Guía de Campo de Dirección**, la plataforma IVC-OS deja de ser una colección teórica de 200 agentes dispersos y se transforma en un **Sistema Operativo de Ingeniería Disciplinada, Validación Comercial y Rigor Fiduciario**.
+Esta sección integra los estándares de calidad humana, diseño visual propio, accesibilidad universal e indexabilidad moderna para asegurar que el producto final no solo sea técnicamente impecable, sino comercialmente exitoso y accesible para todas las personas:
 
-Los directores, arquitectos y operadores que adopten este estándar poseen ahora un manual de vuelo integral que cubre desde la formulación inicial de la intención hasta el barrido de bugs, la compuerta de lanzamiento, la tracción en modo beta y la presentación ejecutiva para inversionistas y clientes fundadores.
+---
+
+### Protocolo 8.1: Ilustración Vectorial Propia en Código SVG y Cero Imágenes de Stock
+* **El Problema:** Los agentes de IA tienden a insertar enlaces externos a fotos de stock genéricas (Unsplash, Pexels o `via.placeholder.com`). Estos enlaces se rompen con el tiempo, ralentizan la carga, filtran datos del usuario a terceros y proyectan una imagen de plantilla barata.
+* **Directiva del Director:**
+  1. **Prohibición de Hotlinking a Bancos de Imágenes:** Queda vetado el uso de URLs externas de stock.
+  2. **Ilustraciones Vectoriales Nativas en Código SVG (Inline SVG):**
+     * En lugar de íconos estándar repetitivos o imágenes pesadas, los agentes deben programar ilustraciones esquemáticas directamente en código SVG.
+     * **Ventajas:** 0 peticiones de red externas (0 ms de latencia), escalabilidad infinita sin pixelarse y adaptación dinámica a temas oscuros y claros mediante CSS (`currentColor`, variables de paleta).
+  3. **Activos Propios Generados:** Cuando se requieran elementos visuales complejos, deben generarse como activos locales dedicados y alojarse dentro del repositorio en `/public/assets/`, nunca vinculados a servidores efímeros de terceros.
+
+---
+
+### Protocolo 8.2: Lenguaje Claro del Mercado Meta y Erradicación de Jerga Técnica Inútil
+* **El Problema:** La IA suele redactar en un "tecnicismo inflado" lleno de anglicismos y acrónimos crípticos que confunden al comprador y al usuario común (*"Orquestación sinérgica de microservicios con cognitive end-to-end framework"*).
+* **Directiva del Director para el Mercado Hispano/Mexicano:**
+  1. **Adopción del Estándar de Lenguaje Claro (*Plain Language*):**
+     * Reducir los acrónimos al mínimo indispensable. Si se usa un acrónimo necesario, debe definirse la primera vez que aparece en pantalla.
+     * Privilegiar el español profesional, directo y cálido:
+       - ❌ *"Seamless onboarding pipeline with automated insights"*
+       -  *"Comienza en 3 pasos sencillos y visualiza tus resultados al instante"*.
+  2. **Gestión Inteligente de Términos Anglosajones:**
+     * Se conservan únicamente aquellos términos técnicos universales cuya traducción al español resulta artificial o distorsiona el significado en la industria (*API*, *SaaS*, *backend*, *frontend*, *webhook*, *cookies*, *login*, *dashboard*).
+     * Todo lo demás debe expresarse en un español impecable, sin modismos de traducción literal que suenen a robot.
+
+---
+
+### Protocolo 8.3: Experiencia Intuitiva de Fricción Cero (*Self-Explanatory UX*) y Apoyos Didácticos
+* **El Objetivo Estratégico:** Hacer que la plataforma sea tan natural y autoevidente que **elimine la necesidad de llamadas de ventas explicativas, demos asistidas o largos tutoriales en video**. El usuario debe entender qué hacer en sus primeros 30 segundos.
+* **Componentes Didácticos Obligatorios:**
+  1. **Guía de Flujo Operativo en 3 Pasos (`/como-funciona`):**
+     * Un esquema visual minimalista que resume el viaje completo:
+       * **Paso 1: Define tu objetivo** (Describe qué necesitas o selecciona una plantilla).
+       * **Paso 2: Supervisa la generación** (El sistema valida contratos y pruebas automáticamente).
+       * **Paso 3: Descarga o despliega** (Obtén tu software o reporte listo para usar).
+  2. **Página de Glosario Integrado (`/glosario`):**
+     * Una subpágina dedicada que explica en una o dos oraciones cotidianas cada concepto técnico que aparezca en la plataforma, pensada tanto para usuarios principiantes como para clientes empresariales.
+  3. **Micro-Copy Contextual (Tooltips sin Bloqueo):**
+     * Breves explicaciones al pasar el cursor o hacer clic sobre términos clave, evitando modales invasivos.
+
+---
+
+### Protocolo 8.4: Estándares Mundiales de Accesibilidad e Inclusión (WCAG 2.1/2.2 AA/AAA)
+La plataforma no debe discriminar por limitaciones visuales, motoras o cognitivas. El Director exige el cumplimiento de los estándares internacionales más rigurosos (WCAG 2.1/2.2, ADA 508, EN 301 549):
+
+1. **Contraste Matemático Riguroso:**
+   - Ratio de contraste mínimo de **4.5:1** para texto normal y **3:1** para texto grande (Nivel AA).
+   - Elementos críticos de acción (botones primarios, alertas) deben alcanzar un contraste superior a **7:1** (Nivel AAA).
+2. **Navegación 100% por Teclado:**
+   - Toda función interactiva debe ser ejecutable sin mouse usando únicamente las teclas `Tab`, `Shift+Tab`, `Enter`, `Espacio` y flechas direccionales.
+   - Indicadores de foco visuales de alto contraste inconfundibles con `:focus-visible` (prohibido `outline: none` sin reemplazo).
+   - Enlace directo accesible en el primer tab: *"Saltar al contenido principal"* (`.skip-link`).
+3. **Soporte para Neurodivergencia (TDAH, Dislexia, Carga Cognitiva):**
+   - Espaciado de texto conforme a WCAG 1.4.12 (altura de línea 1.5x, espaciado entre párrafos 2x).
+   - Respeto absoluto a la preferencia del sistema operativo `prefers-reduced-motion`: animaciones pausadas o desactivadas automáticamente para evitar mareos o sobreestimulación vestibular.
+4. **Mandato Zero-Popup:**
+   - Prohibido el uso de ventanas modales flotantes superpuestas que rompan el scroll en teléfonos móviles o atrapen el foco de lectores de pantalla.
+   - Toda interacción compleja debe abrirse en una **subpágina dedicada con URL limpia y botón de regreso inteligente**, o en paneles integrados con flujo de scroll nativo.
+
+---
+
+### Protocolo 8.5: Optimización Integral Post-Proyecto (SEO, SEM y GEO)
+Al concluir la construcción del software o landing page, el Director debe auditar la visibilidad ante los tres motores modernos de descubrimiento:
+
+1. **SEO Técnico (Motores de Búsqueda Tradicionales - Google/Bing):**
+   - Jerarquía semántica estricta (`<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<footer>`).
+   - Un solo elemento `<h1>` descriptivo por página; estructura de `<h2>` y `<h3>` coherente.
+   - Metadatos canónicos, `sitemap.xml` dinámico, etiquetas OpenGraph y Twitter Cards completas.
+2. **SEM Ready (Campañas de Tráfico Pagado):**
+   - Las páginas de aterrizaje deben alinearse con el mensaje de los anuncios (evitando tasa de rebote por discrepancia de copy).
+   - Tiempos de carga ultrarrápidos (LCP < 2.0s) para maximizar el *Quality Score* en Google Ads y Meta Ads.
+   - Eventos de conversión limpios y rastreables sin violar la privacidad del usuario.
+3. **GEO (Generative Engine Optimization — Optimización para Agentes y Motores de IA):**
+   - Optimización para ser citado, resumido e indexado con precisión por modelos como ChatGPT, Perplexity, Claude y Gemini:
+     * **Archivo `llms.txt`:** Manifiesto estructurado en la raíz del dominio que explica a los crawlers de IA la misión del proyecto, APIs disponibles y resumen ejecutivo.
+     * **Archivo `llms-full.txt`:** Documentación técnica completa en formato markdown limpio, libre de scripts y estilos.
+     * **Archivo `ai.txt`:** Directivas claras de permisos de scraping y atribución para agentes autónomos.
+     * **Marcado Estructurado JSON-LD (Schema.org):** Integración de esquemas `SoftwareApplication`, `Organization`, `WebSite` y `FAQPage` con datos verificables.
+     * **Prerenderizado Semántico en SPAs:** Garantizar que el contenido esencial esté presente en el HTML estático inicial antes de la hidratación de JavaScript.
+
+---
+
+## 9. Conclusión y Transición hacia la Web App de IVC-OS
+
+Con la integración de estos estándares de **Diseño Sensorial SVG, Lenguaje Claro, Accesibilidad Universal (WCAG) y Optimización GEO/SEO**, la **Guía de Campo para Directores de IVC-OS** queda consagrada como una metodología de vanguardia mundial:
+
+* Governa con rigor la estrategia de negocio y la economía de inferencia (Eje I).
+* Aplica la tríada técnica inquebrantable de SDD, Context Engineering y Harness Engineering (Eje II).
+* Garantiza la operación multi-tenant y la supervisión de flotas efímeras (Eje III).
+* Previene anti-patrones letales y provee runbooks ante emergencias (Módulos 4 y 5).
+* Codifica los procedimientos de campo para caza de bugs, pre-lanzamiento, staging de pagos y decks en HTML (Módulo 7).
+* Asegura una experiencia estética propia, humana, inclusiva y visible ante motores de IA (Módulo 8).
 
 **Siguiente Paso Estratégico:**  
-Habiendo establecido, enriquecido y blindado este método rector con tus procedimientos operativos de campo, el proyecto se encuentra en condiciones óptimas para proceder a la **Fase 2**: el diseño y especificación técnica de la **Web App de IVC-OS**, la cual incorporará de forma nativa estos módulos, paneles de administración RBAC, compuertas de pre-lanzamiento y flujos de supervisión humana en su interfaz de usuario.
+Con este marco rector 100% definido, aprobado y sellado, el proyecto se encuentra en el punto óptimo para iniciar la **Fase 2: Plan de Arquitectura y Construcción de la Web App de IVC-OS**.
