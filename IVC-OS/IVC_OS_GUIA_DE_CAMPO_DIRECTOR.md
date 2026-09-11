@@ -593,16 +593,142 @@ Al concluir la construcción del software o landing page, el Director debe audit
 
 ---
 
-## 9. Conclusión y Transición hacia la Web App de IVC-OS
+---
 
-Con la integración de estos estándares de **Diseño Sensorial SVG, Lenguaje Claro, Accesibilidad Universal (WCAG) y Optimización GEO/SEO**, la **Guía de Campo para Directores de IVC-OS** queda consagrada como una metodología de vanguardia mundial:
+## 9. Directivas de Soberanía, Operación en Vivo y Mantenibilidad de Código (El Blindaje del Desarrollador)
 
-* Governa con rigor la estrategia de negocio y la economía de inferencia (Eje I).
-* Aplica la tríada técnica inquebrantable de SDD, Context Engineering y Harness Engineering (Eje II).
-* Garantiza la operación multi-tenant y la supervisión de flotas efímeras (Eje III).
-* Previene anti-patrones letales y provee runbooks ante emergencias (Módulos 4 y 5).
+Esta sección aborda las mayores preocupaciones de los equipos de ingeniería y clientes corporativos: la soberanía de datos, la resiliencia operativa en vivo y la erradicación del código espagueti enredado e indocumentado generado por IA.
+
+---
+
+### Protocolo 9.1: Soberanía de Datos y Garantía Contractual de "Cero Entrenamiento" (*Zero-Training Shield*)
+* **El Problema:** Todo cliente corporativo, inversionista o usuario B2B pregunta: *"¿El código de mi software o los datos de mis usuarios se usarán para entrenar a ChatGPT, Claude o Gemini?"*. La duda destruye la confianza comercial.
+* **Directiva del Director:**
+  1. **Configuración de Cero Retención en Código:** Forzar en el Tool Gateway el uso exclusivo de endpoints comerciales con retención de datos desactivada (`data_retention: 0`) y cabeceras de exclusión explícita (`X-No-Train: true`).
+  2. **Garantía Legal Contractual:** Incluir en el Aviso de Privacidad y Términos de Servicio una cláusula fiduciaria inmutable:
+     > *"Garantía de Soberanía Cognitiva: IVC-OS garantiza contractualmente que ninguna porción de tu código, datos de clientes o intenciones procesadas será utilizada para el reentrenamiento, ajuste fino (fine-tuning) o mejora de ningún modelo público o privado de inteligencia artificial."*
+
+---
+
+### Protocolo 9.2: El Botón de Desconexión de Emergencia de Agentes (*Global Kill-Switch*)
+* **El Problema:** Un agente o webhook en bucle anómalo puede comenzar a enviar correos masivos por error, borrar tablas de base de datos o saturar APIs externas con miles de dólares en llamadas no deseadas.
+* **Directiva del Director:**
+  - Implementar en el panel de Superadmin un **Kill-Switch de Emergencia físico (botón rojo con confirmación de dos pasos)** que en menos de 500 ms:
+    1. Envía una señal `SIGKILL` a todos los contenedores Docker de agentes en ejecución en el arnés.
+    2. Revoca y elimina instantáneamente todos los tokens de sesión efímeros de las herramientas.
+    3. Pone a la plataforma en **Modo Seguro de Solo-Lectura (*Read-Only Maintenance Mode*)**, notificando al Director y a los usuarios con un mensaje de protección de integridad.
+
+---
+
+### Protocolo 9.3: Migraciones de Base de Datos "Zero-Downtime" (*Expand & Contract Pattern*)
+* **El Problema:** Los agentes suelen proponer cambios destructivos inmediatos: renombrar columnas de golpe (`ALTER TABLE users RENAME name TO full_name`), lo que tira la aplicación en producción mientras el nuevo frontend se despliega.
+* **Directiva del Director (Regla de Expansión y Contracción en 3 Fases):**
+  1. **Fase 1 (Expandir):** Se agrega la nueva columna en la base de datos sin tocar la existente. El nuevo código escribe en ambas columnas y lee preferentemente de la nueva con fallback a la vieja.
+  2. **Fase 2 (Migrar en Segundo Plano):** Se corre un script en background para transferir los datos históricos a la nueva estructura sin bloquear lecturas ni escrituras.
+  3. **Fase 3 (Contraer):** Solo después de 72 horas de estabilidad comprobada en producción con el nuevo release, se programa una migración final para eliminar la columna vieja. Cero caídas de servicio.
+
+---
+
+### Protocolo 9.4: Lanzamiento Silencioso y Despliegue Escalonado (*Feature Flags & Dark Launching*)
+* **El Problema:** Activar una funcionalidad grande de golpe a todos los usuarios expone a la empresa a fallos masivos imprevistos y sobrecarga de soporte.
+* **Directiva del Director:**
+  - Toda nueva característica debe nacer apagada por defecto detrás de una bandera booleana (`ENABLE_ADVANCED_WORKSPACE=false`).
+  - **Secuencia de Liberación en 3 Fases:**
+    * *Fase 1 (Superadmin Only):* Probada en producción exclusivamente por el Director.
+    * *Fase 2 (Cohorte de Clientes Fundadores):* Activada únicamente para el 10% de los usuarios beta.
+    * *Fase 3 (Disponibilidad General):* Encendido al 100% solo tras validar cero excepciones críticas en telemetría. Ante cualquier problema, la bandera se apaga en un clic sin necesidad de hacer un redeploy.
+
+---
+
+### Protocolo 9.5: Soberanía del Cliente y Exportación Total en 1 Clic (*Zero Vendor Lock-In*)
+* **El Problema:** El miedo al "secuestro de datos" o dependencia cautiva (*vendor lock-in*) paraliza las decisiones de compra de clientes empresariales y desarrolladores independientes.
+* **Directiva del Director:**
+  - Toda cuenta dentro de IVC-OS debe incluir en su configuración el botón: **"Exportar Todos Mis Proyectos (.ZIP)"**.
+  - En un solo clic y sin costo, genera un archivo comprimido descargable con:
+    * El código fuente completo generado y limpio.
+    * Los esquemas y modelos de datos en SQL DDL / JSON Schema.
+    * Los documentos de especificación en Markdown (`SPEC.md`, `CONTEXT.md`).
+    * Las ilustraciones e íconos vectoriales SVG.
+  - *Ventaja:* Transforma la objeción comercial en un argumento de venta fulminante: *"Eres dueño absoluto de lo que construyes aquí"*.
+
+---
+
+### Protocolo 9.6: Centinela Silencioso de Alertas Críticas (*Watchdog Bot a Telegram / Discord*)
+* **El Problema:** El Director no debe ser esclavo de revisar dashboards de logs continuamente para saber si algo falló.
+* **Directiva del Director:**
+  - Configurar un webhook ultraligero que despacha alertas inmediatas al chat privado de Telegram o Discord del Director **únicamente ante 4 eventos críticos de alta prioridad**:
+    - 🚨 **Error 500 no controlado en producción:** URL afectada, usuario y stack trace sintetizado.
+    - 💳 **Nuevo cliente registrado o checkout beta completado:** Datos del lead y plan elegido.
+    - ⚠️ **Presupuesto de inferencia al 80%:** Alerta de consumo acelerado de tokens de IA.
+    - 🛑 **Disyuntor de seguridad activado:** Agente abortado por bucle infinito o intento de fuga en sandbox.
+
+---
+
+### Protocolo 9.7: Resiliencia "Local-First" y Persistencia de Borradores (*Auto-Draft & Offline Recovery*)
+* **El Problema:** Un usuario redacta una especificación o requerimiento complejo, parpadea su conexión a internet o cierra accidentalmente la pestaña del navegador y pierde todo lo escrito, causando una frustración extrema.
+* **Directiva del Director:**
+  - Todo formulario, editor de especificaciones y campo de texto en la plataforma debe sincronizarse en tiempo real con el almacenamiento local del navegador (`localStorage` / `IndexedDB`).
+  - Si el usuario recarga la página o regresa horas después, el sistema restaura el borrador automáticamente mostrando un indicador sutil: *"Borrador restaurado localmente"*.
+
+---
+
+### Protocolo 9.8: Modo Sombra para Evaluación Ciega de Nuevos Modelos de IA (*Shadow Mode Model Eval*)
+* **El Problema:** Cuando OpenAI, Anthropic o Google lanzan un nuevo modelo, sustituir el modelo de producción en caliente puede causar degradación inesperada de calidad o explosión de costos.
+* **Directiva del Director:**
+  - El sistema debe soportar un enrutamiento en "Modo Sombra":
+    * El 90% del tráfico es atendido por el modelo titular estable.
+    * Un 10% de las tareas no críticas se envían en paralelo al nuevo modelo candidato.
+    * El sistema registra y compara silenciosamente: latencia promedio, costo en tokens, cumplimiento de contratos Zod y tasa de pruebas en verde en el primer intento. Solo si el nuevo modelo supera al titular en las 4 métricas, el Director autoriza la migración oficial.
+
+---
+
+### Protocolo 9.9: Documentación Viva, Modularización Estricta (Anti-God-Files) y Sincronización Inmutable de Specs
+* **El Problema Histórico:** Los desarrolladores suelen rechazar el código asistido por IA porque *"nadie lo entiende, está súper enredado, es un archivo monstruo de 1,500 líneas y la documentación nunca coincide con lo que el código hace realmente"*.
+* **Directivas de Blindaje del Director:**
+  1. **Regla de Modularización Estricta (Límite Máximo de 250 Líneas por Archivo):**
+     * Queda terminantemente prohibido generar archivos "Dios" (*God-Files*).
+     * Ningún componente de frontend ni servicio de backend puede superar las **250-300 líneas de código**.
+     * Si un componente crece por encima de este umbral, el agente tiene la obligación mandatoria de descomponerlo en:
+       - Subcomponentes atómicos de presentación.
+       - Hooks personalizados para la lógica de estado (`useProjectWorkflow.ts`).
+       - Servicios utilitarios puros aislados en `/lib/` o `/utils/`.
+  2. **Documentación Viva con Explicación del "Por Qué" (TSDoc / JSDoc / Docstrings):**
+     * Todo archivo, interfaz, enum y función pública debe contar con encabezados de documentación que expliquen el **propósito de diseño y las decisiones no obvias**, no meramente lo que el código ya hace a simple vista:
+       ```typescript
+       /**
+        * Gestiona la ejecución confinada de un agente dentro del arnés Docker.
+        * 
+        * RATIONALE: Se utiliza un volumen efímero montado en modo Copy-on-Write para
+        * evitar que los fallos del agente contaminen el árbol de código principal del host.
+        *
+        * @param agentId Identificador único del agente en ejecución.
+        * @param specHash Hash criptográfico del contrato aprobado.
+        * @throws {SandboxEgressError} Si el agente intenta realizar llamadas de red externas no autorizadas.
+        */
+       export async function executeInHarness(agentId: string, specHash: string): Promise<ExecutionResult> { ... }
+       ```
+  3. **Sincronización Bidireccional Inmutable de Especificaciones (Cero Spec Drift):**
+     * Si durante la implementación se detecta que un tipo o comportamiento debe modificarse, **está prohibido parchar el código a espaldas de la especificación**.
+     * El agente debe actualizar obligatoriamente el archivo `PROJECT_SPEC.md` en el **mismo commit** en que modifica el código. Si el pull request altera la lógica del sistema pero no actualiza la especificación correspondiente, el arnés rechaza el cambio automáticamente.
+  4. **El Test de los 2 Minutos para Nuevos Desarrolladores:**
+     * Cualquier desarrollador humano nuevo en el equipo debe ser capaz de abrir cualquier carpeta del proyecto, leer el archivo `README.md` / `SPEC.md` local y comprender la arquitectura en menos de 2 minutos.
+
+---
+
+## 10. Conclusión y Transición hacia la Web App de IVC-OS
+
+Con la integración de este catálogo exhaustivo de directivas de **Soberanía de Datos, Kill-Switch de Emergencia, Migraciones Zero-Downtime, Modularización Estricta (Anti-God-Files) y Documentación Viva**, la **Guía de Campo para Directores de IVC-OS** queda consagrada como el estándar más avanzado, completo y riguroso de la industria para dirigir plataformas de vibe coding.
+
+El método no deja cabos sueltos:
+* Governa con rigor la estrategia de negocio, la economía de inferencia y la soberanía de datos (Ejes I y IV).
+* Aplica la tríada técnica inquebrantable de SDD, Context Engineering y Harness Engineering con modularización estricta (Eje II).
+* Garantiza la operación multi-tenant, el aislamiento y la supervisión de flotas efímeras (Eje III).
+* Previene anti-patrones letales y provee runbooks mecánicos ante emergencias (Módulos 4 y 5).
 * Codifica los procedimientos de campo para caza de bugs, pre-lanzamiento, staging de pagos y decks en HTML (Módulo 7).
-* Asegura una experiencia estética propia, humana, inclusiva y visible ante motores de IA (Módulo 8).
+* Asegura una experiencia estética propia en SVG, lenguaje claro hispano, accesibilidad universal (WCAG) y optimización GEO/SEO (Módulo 8).
+* Blinda al desarrollador humano contra el código enredado, exigiendo documentación viva, sincronización inmutable de specs y archivos menores a 250 líneas (Módulo 9).
+
+---
 
 **Siguiente Paso Estratégico:**  
-Con este marco rector 100% definido, aprobado y sellado, el proyecto se encuentra en el punto óptimo para iniciar la **Fase 2: Plan de Arquitectura y Construcción de la Web App de IVC-OS**.
+Con el método rector 100% completado, respaldado y blindado en el repositorio Git, el proyecto se encuentra en el momento óptimo para activar formalmente la **Fase 2: Plan de Arquitectura y Construcción de la Web App de IVC-OS**.

@@ -55,12 +55,23 @@ The resulting deliverable is the **IVC-OS Director's Field Guide** (`IVC_OS_GUIA
    - Protocol 8.4: International Accessibility & Inclusivity (WCAG 2.1/2.2 AA/AAA, >4.5:1 / 7:1 contrast, 100% keyboard navigation, ADHD/Dyslexia motion-reduction, Zero-Popup mandate).
    - Protocol 8.5: Post-Launch Discovery & Indexing (SEO technical hierarchy, SEM conversion landing parity, GEO optimization via `llms.txt`, `llms-full.txt`, `ai.txt` and Schema.org JSON-LD).
 
-6. **Emergency Runbook & Lethal Anti-Patterns:**
+6. **Layer VI: Data Sovereignty, Live Operations & Developer Maintainability:**
+   - Protocol 9.1: Zero-Training Contractual Shield (`data_retention: 0`, `X-No-Train: true`).
+   - Protocol 9.2: Global Agent Kill-Switch (sub-500ms emergency pause, token revocation, read-only maintenance mode).
+   - Protocol 9.3: Zero-Downtime Database Migrations (Expand, Migrate in background, Contract).
+   - Protocol 9.4: Feature Flags & Dark Launching (Superadmin -> Founding Cohort -> General Availability).
+   - Protocol 9.5: Zero Vendor Lock-in 1-Click .ZIP Data Export (code, schemas, specs, SVG assets).
+   - Protocol 9.6: Silent Watchdog Bot to Telegram/Discord (alerts on 500 errors, new checkouts, 80% token burn, agent circuit breaker).
+   - Protocol 9.7: Local-First Auto-Draft Resilience (`localStorage`/`IndexedDB` auto-restore on closed tabs/network flickers).
+   - Protocol 9.8: Shadow Mode Model Evaluation (10% traffic blind testing before model migration).
+   - Protocol 9.9: Living Documentation, Strict Anti-God-Files (<250-300 lines per file), and Immutable Bidirectional Spec Synchronization (Zero Spec Drift, 2-minute comprehension test).
+
+7. **Emergency Runbook & Lethal Anti-Patterns:**
    - Cold shutdown, hard git rollback (`git reset --hard HEAD`), and memory purge for architectural drift.
    - Immediate container pause, secret rotation, and Semgrep static analysis for sandbox egress violations.
    - 3-strike circuit breaker and root-cause analyzer invocation for infinite debug loops.
 
-7. **Binary Decision Matrix (Hard Gates 1 to 6):**
+8. **Binary Decision Matrix (Hard Gates 1 to 6):**
    - Non-negotiable Go / No-Go evaluation criteria covering Spec, Veracity, Test Harness, Diff Size, Adversarial Review, and Hardening.
 
 ---
