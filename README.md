@@ -8,7 +8,8 @@
 
 > [!NOTE]
 > **Aviso de Alcance y Desacoplamiento de Repositorios:**  
-> Este repositorio está dedicado **exclusivamente al marco metodológico, directivas normativas, plantillas y guía de campo de dirección (`IVC-OS Field Guide`)**. El código fuente de implementación de la aplicación web y la plataforma de software se respaldará y desarrollará en un repositorio y ruta independiente.
+> Este repositorio está dedicado **exclusivamente al marco metodológico, directivas normativas, plantillas y guía de campo de dirección (`IVC-OS Field Guide`)**.  
+> La implementación del software y la plataforma web oficial se encuentran en: **[OrkestradOS en GitHub](https://github.com/alfredoramirezro/OrkestradOS)**.
 
 ---
 
