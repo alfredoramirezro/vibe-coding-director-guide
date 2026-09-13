@@ -40,16 +40,23 @@ flowchart TD
 
 Esta fase establece las reglas del juego, los límites del sistema y la arquitectura antes de permitir que cualquier agente escriba la primera línea de código de aplicación.
 
-### Directiva 0.1: Delimitación de Alcance y Frontera Negativa (*Intent Framing*) `[P0]`
+### Directiva 0.1: Delimitación de Alcance, Offer Builder y Frontera Negativa (*Intent Framing*) `[P0]`
 * **Contexto / Trigger:** Inicio de cualquier proyecto, épica o módulo funcional.
-* **Insumos Obligatorios:** Problema real de negocio, usuario primario, métrica cuantificable y lista explícita de exclusiones.
+* **Insumos Obligatorios:** Hipótesis comercial (Offer Builder de 6 Pilares: Cliente Objetivo, Dolor Crítico, Resultado Tangible, Mecanismo Único, Garantía y Prueba), Gatillo de 2 Personas y Lista Explícita de Exclusiones.
 * **Procedimiento del Director:**
-  1. **Formular la Frontera Negativa:** Definir con total precisión qué **NO** hace el sistema en esta versión. Esto previene que los agentes hiper-generen subsistemas no solicitados.
-  2. **Test de Descomposición:** Si la intención del usuario involucra más de una frontera de datos o más de dos subsistemas independientes, el Director la descompone en subproyectos atómicos antes de interactuar con el primer agente.
-  3. **Inyección de Restricciones Operativas:** Stack autorizado, dependencias permitidas y entorno de destino fijados de antemano.
+  1. **El Offer Builder de 6 Pilares:** Delimitar la oferta antes del código:
+     - *Cliente Objetivo:* Perfil hiperespecífico (ej. fundadores técnicos pre-revenue o agencias con flujos repetitivos), nunca "empresas en general".
+     - *Dolor Crítico:* Problema costoso en tiempo o dinero que el cliente ya intenta resolver ineficientemente.
+     - *Resultado Tangible:* Transformación medible (ej. "generar un sistema de diseño consistente en menos de 10 minutos").
+     - *Mecanismo Único:* Cómo la arquitectura resuelve el dolor sin exigir esfuerzo desmedido al cliente.
+     - *Garantía de Cero Riesgo:* Reducción de fricción de adopción.
+     - *Señal de Mercado:* Validación contra alternativas existentes.
+  2. **Identificación del "Gatillo de 2 Personas" (*Two-Person Trigger*):** El momento exacto donde la solución manual (Excels, archivos locales, notas) se desincroniza y el software se vuelve obligatorio e indispensable.
+  3. **Formular la Frontera Negativa Obligatoria [P0]:** Declarar con precisión quirúrgica qué **NO** hace el sistema en esta versión para frenar el gasto circular de tokens y la alucinación de dependencias.
+  4. **Test de Descomposición:** Si la intención del usuario involucra más de una frontera de datos o más de dos subsistemas independientes, el Director la descompone en subproyectos atómicos antes de interactuar con el primer agente.
 * **Hard Gate:**
   * ❌ *NO-GO:* Requerimientos vagos como "haz una app como Uber con chat, mapas y pagos".
-  *  *GO:* Alcance delimitado: *"Módulo de registro con Next.js + PostgreSQL + RLS, excluyendo pagos y mapas en esta iteración"*.
+  *  *GO:* Alcance delimitado: *"Módulo de registro con Next.js + PostgreSQL + RLS, excluyendo pagos y mapas en esta iteración; gatillo de 2 personas documentado"*.
 
 ### Directiva 0.2: Soberanía de Datos y Garantía Contractual de "Cero Entrenamiento" (*Zero-Training Shield*) `[P0]`
 * **Contexto:** Garantizar a inversionistas y clientes corporativos B2B que su código y datos jamás reentrenarán modelos públicos.
@@ -111,9 +118,10 @@ Esta fase establece las reglas del juego, los límites del sistema y la arquitec
 
 ### Directiva 0.10: Gobernanza del MVP, Doble Horizonte y Matriz de Triaje de Características `[P0]`
 * **El Problema Crítico:** El Director sufre de **Amnesia de Visión** (olvida la catedral completa por hiperfocarse en los detalles mínimos del MVP) y cae en la trampa de **Sugerencias de la IA** (los agentes halagan sugiriendo features accesorias y queman tokens en código prematuro e incompleto).
-* **1. El Framework de Doble Horizonte en el Repositorio:**
-  * `NORTH_STAR.md` (**La Catedral Inmutable** a 12-24 meses): Plano maestro del SaaS completo. Vive en el repositorio para que el Director nunca pierda el rumbo, pero **NUNCA se inyecta completo al agente que programa el MVP**.
-  * `MVP_BOUNDARY.md` (**El Primer Ladrillo Quirúrgico**): Define exclusivamente la *Hipótesis Central de Valor*: la versión mínima que resuelve el dolor principal tan bien que el usuario pagaría por ella. Todo lo demás está prohibido.
+* **1. El Framework de la Trinidad de Contratos en el Repositorio:**
+  * `NORTH_STAR.md` (**La Catedral Inmutable** a 12-24 meses): Plano maestro del producto completo. Vive en el repositorio para que el Director nunca pierda el rumbo, pero **NUNCA se inyecta completo al agente que programa el MVP**.
+  * `MVP_BOUNDARY.md` (**El Primer Ladrillo Quirúrgico**): Define exclusivamente la *Hipótesis Central de Valor* con su Frontera Negativa obligatoria [P0] y el Gatillo de 2 Personas.
+  * `DESIGN.md` (**La Fuente de la Verdad Visual**): Tokens de diseño inmutables (paleta semántica, tipografía, espaciados y mandato Zero-Popup) para que los agentes de IA jamás alucinen interfaces arbitrarias o inconsistentes.
   * `FEATURE_PARKING_LOT.md` (**La Bóveda de Ideas**): Archivo de texto plano donde se congelan en 2 líneas las ideas brillantes para el futuro, consumiendo 30 tokens en lugar de 15,000 tokens en código improvisado.
 * **2. Directiva de Contención en el Prompt del Agente (El Bozal a la IA):**
   > *"DIRECTIVA DE CONTENCIÓN ESTRICTA: Tu rol se limita EXCLUSIVAMENTE a implementar lo solicitado en la especificación activa. Queda ESTRICTAMENTE PROHIBIDO sugerir nuevas funcionalidades, librerías extras o extensiones de producto. Si detectas una oportunidad fuera del alcance, regístrala únicamente como un punto en `FEATURE_PARKING_LOT.md` sin generar código ni insistir."*
@@ -273,7 +281,27 @@ Esta fase capacita al Director para captar clientes fundadores, validar disposic
   5. *Slide 5:* Blindaje y garantía de cero riesgo (exportación total de datos).
   6. *Slide 6:* Llamado a la acción (reserva de cupo en la cohorte).
 
-### Directiva 3.4: Modo Sombra para Evaluación Ciega de Nuevos Modelos de IA `[P2]`
+### Directiva 3.4: Generación de Decks en HTML 16:9 para Soluciones B2B High-Ticket ($10k–$25k USD) `[P2]`
+* Presentación ejecutiva para consultoría de producto y contratos corporativos de 8 slides (`deck-b2b-solution.html`):
+  1. *Slide 1:* Portada ejecutiva y contexto de la transformación empresarial.
+  2. *Slide 2:* Diagnóstico del "Gatillo de 2 Personas" (cuello de botella de hojas de cálculo, procesos manuales y desincronización de equipos).
+  3. *Slide 3:* Costo de la Inacción (horas hombre perdidas, riesgo de fuga de datos y multas regulatorias).
+  4. *Slide 4:* Arquitectura de la Solución Propuesta (Frontend reactivo, Backend seguro, RLS y soberanía de datos).
+  5. *Slide 5:* Cronograma y Entregables Atómicos en 4 Semanas (Sprints semanales con demos funcionales).
+  6. *Slide 6:* Soberanía Total de Datos y Blindaje de Propiedad Intelectual (código del cliente, cero entrenamiento público).
+  7. *Slide 7:* Estructura de Inversión y ROI Estimado ($15k–$25k USD llave en mano, recuperable en < 90 días).
+  8. *Slide 8:* Siguientes Pasos y Arranque del Sprint de Incepción.
+
+### Directiva 3.5: El Doble Motor de Comercialización y Onboarding de "Cero Deberes" `[P1]`
+* **El Doble Motor de Ingresos:**
+  - *Vía A (Micro-SaaS Recurrente $49–$99/mes):* Modelo self-serve donde la velocidad de adopción y el checkout beta de baja fricción validan el mercado masivo.
+  - *Vía B (Solución Personalizada B2B $10k–$25k USD):* Para clientes corporativos donde el software resuelve un dolor operativo crítico específico. El Director entrega software a la medida en semanas utilizando arneses IVC-OS con márgenes del 85%+.
+* **La Filosofía de Onboarding "Cero Deberes" (*Zero-Homework Onboarding*):**
+  - Nunca presentar al usuario una pantalla vacía con 10 campos en blanco que exijan redactar desde cero.
+  - Proveer plantillas predefinidas en 1 clic (*Presets*) que rellenen el 80% del formulario con datos realistas del dominio (ej. plantillas para SaaS Fiscal o Portal de Proveedores).
+  - El usuario solo ajusta sus particularidades y genera resultados en menos de 60 segundos.
+
+### Directiva 3.6: Modo Sombra para Evaluación Ciega de Nuevos Modelos de IA `[P2]`
 * Enrutamiento del 10% del tráfico no crítico a nuevos modelos candidatos en segundo plano. Comparación silenciosa de latencia, costo y tasa de pruebas en verde frente al modelo titular antes de autorizar la migración oficial.
 
 ---

@@ -4,7 +4,13 @@
 
 ---
 
-## 1. La Hipótesis Central de Valor
+## 1. La Hipótesis Central de Valor y Offer Builder
+* **Perfil de Cliente Objetivo:** [Ej: Despachos contables con más de 50 clientes / Agencias de marketing]
+* **Dolor Crítico Operativo:** [El problema costoso en tiempo o dinero que hoy resuelven a mano]
+* **Resultado Tangible Prometido:** [Transformación medible en < X tiempo]
+* **Mecanismo Único:** [Cómo la arquitectura o motor del software lo resuelve sin fricción]
+* **Gatillo de 2 Personas (*Two-Person Trigger*):**  
+  *[El punto exacto donde la solución manual en Excel/carpetas compartidas se desincroniza y el software se vuelve indispensable]*
 * **La Promesa Única:**  
   *"Si le permitimos al usuario hacer [ACCIÓN CENTRAL], podrá resolver [DOLOR CRÍTICO] en menos de [TIEMPO], y estará dispuesto a pagar por ello."*
 

@@ -31,11 +31,12 @@ La guía está articulada cronológicamente cubriendo todo el ciclo de vida del 
 │                                CICLO DE VIDA IVC-OS                                    │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
 │ FASE 0: Incepción, Contratos, Soberanía y Diseño Previo (Día 0)                        │
-│         - Intent Framing y Frontera Negativa (definir qué NO construir).               │
+│         - Intent Framing, Offer Builder y Frontera Negativa (qué NO construir).        │
+│         - Gatillo de 2 Personas: Detección del punto de quiebre de soluciones manuales.│
 │         - Garantía de Cero-Entrenamiento (Zero-Training Shield en contratos).          │
 │         - Spec-Driven Development (SDD): Congelar schemas Zod/OpenAPI antes de codificar│
 │         - Anti-God-Files: Archivos modulares estrictamente < 250 líneas.               │
-│         - Doble Horizonte: NORTH_STAR (Catedral) vs MVP_BOUNDARY (Primer Ladrillo).    │
+│         - Trinidad de Contratos: NORTH_STAR (Catedral), MVP_BOUNDARY y DESIGN.md.      │
 │         - Bóveda FEATURE_PARKING_LOT: Desvío de sugerencias de la IA para ahorrar tokens.│
 │                                                                                        │
 │ FASE 1: Construcción Confinada y Desarrollo Agéntico en Arnés (Día 1)                 │
@@ -54,8 +55,9 @@ La guía está articulada cronológicamente cubriendo todo el ciclo de vida del 
 │                                                                                        │
 │ FASE 3: Validación de Tracción, Mercado y Presentación Comercial (Día 3)               │
 │         - Graceful Payment Stubbing: Checkout beta con descuento fundador sin tarjeta. │
-│         - Decks en HTML 16:9 autocontenidos: Investor Pitch Deck (10 slides) y         │
-│           Founding Customers Cohort Deck (6 slides) con navegación por teclado.        │
+│         - Decks en HTML 16:9 autocontenidos: Investor Deck (10 slides), Founding       │
+│           Customers Deck (6 slides) y Solución B2B High-Ticket $10k-$25k (8 slides).   │
+│         - Doble Motor Comercial: Micro-SaaS recurrente vs Soluciones a la medida.      │
 │         - Modo Sombra (Shadow Mode): Evaluación ciega del 10% de tráfico para IA nueva.│
 │                                                                                        │
 │ FASE 4: Pre-Lanzamiento, Blindaje y Despliegue Go-Live (Día 4)                         │
@@ -127,12 +129,13 @@ Actúa como el Director Técnico bajo este estándar para planificar la siguient
 
 ## 📁 Plantillas Listas para Usar (Templates Incluidos)
 
-En la carpeta [`templates/`](templates/) encontrarás las 4 plantillas oficiales para arrancar tus proyectos sin fricción:
+En la carpeta [`templates/`](templates/) encontrarás las 5 plantillas oficiales para arrancar tus proyectos sin fricción bajo la Trinidad de Contratos:
 
 | Archivo | Propósito |
 |---|---|
 | [`templates/NORTH_STAR.template.md`](templates/NORTH_STAR.template.md) | La Catedral: mapa de visión completa a 12-24 meses. |
-| [`templates/MVP_BOUNDARY.template.md`](templates/MVP_BOUNDARY.template.md) | El Primer Ladrillo: delimitación estricta de la hipótesis del MVP. |
+| [`templates/MVP_BOUNDARY.template.md`](templates/MVP_BOUNDARY.template.md) | El Primer Ladrillo: delimitación del MVP con Gatillo de 2 Personas y Frontera Negativa [P0]. |
+| [`templates/DESIGN.template.md`](templates/DESIGN.template.md) | Tokens UI & Anti-Slop: fuente de la verdad visual inmutable y mandato Zero-Popup. |
 | [`templates/FEATURE_PARKING_LOT.template.md`](templates/FEATURE_PARKING_LOT.template.md) | La Bóveda de Ideas: desvío de sugerencias para ahorrar tokens. |
 | [`templates/SESSION_PRIMER.template.md`](templates/SESSION_PRIMER.template.md) | Paquete de contexto limpio y bozal anti-feature creep para el agente. |
 
